@@ -45,10 +45,10 @@ const Skills = () => {
     {
       title: 'Backend',
       skills: [
-        { name: 'Node.js', level: 55, icon: <FaNodeJs className="text-green-600" /> },
-        { name: 'Express.js', level: 35, icon: <FaNodeJs className="text-gray-600" /> },
-        { name: 'MongoDB', level: 50, icon: <FaDatabase className="text-green-500" /> },
-        { name:  'MySQL', level: 80, icon: <GrMysql className="text-gray-600" /> },
+        { name: 'Node.js', level: 90, icon: <FaNodeJs className="text-green-600" /> },
+        { name: 'Express.js', level: 80, icon: <FaNodeJs className="text-gray-600" /> },
+        { name: 'MongoDB', level: 85, icon: <FaDatabase className="text-green-500" /> },
+        { name:  'MySQL', level: 50, icon: <GrMysql className="text-gray-600" /> },
       ],
     },
     {
@@ -56,7 +56,7 @@ const Skills = () => {
       skills: [
         { name: 'Git', level: 75, icon: <FaGitAlt className="text-orange-600" /> },
         { name: 'GitHub', level: 95, icon: <FaGithub className="text-gray-800" /> },
-        { name: 'Vercel', level: 80, icon: <SiVercel className="text-gray-900" /> },
+        { name: 'Vercel', level: 85, icon: <SiVercel className="text-gray-900" /> },
         { name: 'VisualStudio Code', level: 97, icon: <BiLogoVisualStudio className="text-blue-500" /> },
       ],
     },
