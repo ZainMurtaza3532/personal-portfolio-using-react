@@ -24,25 +24,25 @@ const Footer = () => {
       icon: <Github className="w-5 h-5" />, 
       label: 'GitHub', 
       link: "https://github.com/ZainMurtaza3532",
-      hoverColor: "hover:from-gray-700 hover:to-gray-900"
+      hoverClass: "hover:bg-gray-700 hover:border-gray-600"
     },
     { 
       icon: <Linkedin className="w-5 h-5" />, 
       label: 'LinkedIn', 
       link: "https://www.linkedin.com/in/zain-murtaza-ghulam-murtaza-185a67304/",
-      hoverColor: "hover:from-blue-600 hover:to-blue-800"
+      hoverClass: "hover:bg-[#0A66C2] hover:border-[#0A66C2]"
     },
     { 
       icon: <Twitter className="w-5 h-5" />, 
       label: 'Twitter', 
       link: "#",
-      hoverColor: "hover:from-blue-400 hover:to-blue-600"
+      hoverClass: "hover:bg-[#1DA1F2] hover:border-[#1DA1F2]"
     },
     { 
       icon: <Mail className="w-5 h-5" />, 
       label: 'Email', 
       link: "mailto:zain@example.com",
-      hoverColor: "hover:from-red-500 hover:to-red-700"
+      hoverClass: "hover:bg-[#EA4335] hover:border-[#EA4335]"
     }
   ];
   
@@ -61,24 +61,24 @@ const Footer = () => {
   const secondColumnLinks = footerLinks.slice(4);
 
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-black text-white pt-20 pb-10 px-4 sm:px-6 lg:px-8 border-t border-gray-800">
+    <footer className="bg-gradient-to-b from-gray-900 to-black text-white pt-20 pb-8 px-4 sm:px-6 lg:px-8 border-t border-gray-800">
       <div className="max-w-7xl mx-auto">
         
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8 mb-16">
           
-          {/* Brand & Description (Takes up 2 columns on Large screens) */}
-          <div className="lg:col-span-2" data-aos="fade-right" data-aos-duration="1000">
-            <div className="flex items-center mb-6" data-aos="fade-down" data-aos-delay="100">
+          {/* Brand & Description */}
+          <div className="md:col-span-2" data-aos="fade-right" data-aos-duration="1000">
+            <a href="#home" className="inline-flex items-center mb-6 group focus:outline-none" data-aos="fade-down" data-aos-delay="100">
               <img
                 src={logo}
                 alt="Zain Logo"
-                className="w-14 h-14 object-contain"
+                className="w-12 h-12 object-contain group-hover:scale-105 transition-transform duration-300"
               />
               <span className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 ml-3 tracking-wide">
                 ZAIN
               </span>
-            </div>
+            </a>
             
             <p className="text-gray-400 mb-8 max-w-md text-base leading-relaxed" data-aos="fade-up" data-aos-delay="200">
               Passionate web developer creating beautiful, responsive web experiences with modern technologies. Building the digital future, one line of code at a time.
@@ -92,7 +92,7 @@ const Footer = () => {
                   href={social.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-12 h-12 bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:shadow-lg bg-gradient-to-r ${social.hoverColor}`}
+                  className={`w-11 h-11 bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-full flex items-center justify-center text-gray-300 transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:text-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${social.hoverClass}`}
                   aria-label={social.label}
                 >
                   {social.icon}
@@ -103,16 +103,16 @@ const Footer = () => {
           
           {/* Quick Links */}
           <div className="lg:col-span-1" data-aos="fade-up" data-aos-delay="400">
-            <h3 className="text-lg font-bold mb-6 text-white uppercase tracking-wider">Quick Links</h3>
+            <h3 className="text-sm font-bold mb-6 text-gray-200 uppercase tracking-widest">Quick Links</h3>
             <nav className="grid grid-cols-2 gap-x-4 gap-y-3">
               <ul className="space-y-3">
                 {firstColumnLinks.map((link, index) => (
                   <li key={index}>
                     <a 
                       href={link.href} 
-                      className="group flex items-center text-gray-400 hover:text-purple-400 transition-colors duration-300"
+                      className="group flex items-center text-gray-400 hover:text-purple-400 transition-colors duration-300 focus:outline-none focus:text-purple-400"
                     >
-                      <ChevronRight className="w-4 h-4 mr-1 text-gray-600 group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-300" />
+                      <ChevronRight className="w-4 h-4 mr-1.5 text-gray-600 group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-300" />
                       <span className="text-sm font-medium">{link.name}</span>
                     </a>
                   </li>
@@ -123,9 +123,9 @@ const Footer = () => {
                   <li key={index}>
                     <a 
                       href={link.href} 
-                      className="group flex items-center text-gray-400 hover:text-purple-400 transition-colors duration-300"
+                      className="group flex items-center text-gray-400 hover:text-purple-400 transition-colors duration-300 focus:outline-none focus:text-purple-400"
                     >
-                      <ChevronRight className="w-4 h-4 mr-1 text-gray-600 group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-300" />
+                      <ChevronRight className="w-4 h-4 mr-1.5 text-gray-600 group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-300" />
                       <span className="text-sm font-medium">{link.name}</span>
                     </a>
                   </li>
@@ -136,36 +136,40 @@ const Footer = () => {
           
           {/* Contact Info */}
           <div className="lg:col-span-1" data-aos="fade-left" data-aos-delay="500">
-            <h3 className="text-lg font-bold mb-6 text-white uppercase tracking-wider">Get In Touch</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start group">
-                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 mr-4 group-hover:bg-purple-900/50 transition-colors duration-300">
-                  <Mail className="w-4 h-4 text-purple-400" />
-                </div>
-                <div className="flex flex-col pt-2">
-                  <a href="mailto:zain@example.com" className="text-gray-400 text-sm hover:text-white transition-colors">
-                    zain@example.com
-                  </a>
-                </div>
+            <h3 className="text-sm font-bold mb-6 text-gray-200 uppercase tracking-widest">Get In Touch</h3>
+            <ul className="space-y-5">
+              <li>
+                <a href="mailto:zain@example.com" className="group flex items-start focus:outline-none">
+                  <div className="w-10 h-10 rounded-full bg-gray-800/80 border border-gray-700 flex items-center justify-center flex-shrink-0 mr-4 group-hover:bg-purple-900/40 group-hover:border-purple-500/50 transition-colors duration-300">
+                    <Mail className="w-4 h-4 text-gray-400 group-hover:text-purple-400 transition-colors" />
+                  </div>
+                  <div className="flex flex-col pt-2">
+                    <span className="text-gray-400 text-sm font-medium group-hover:text-purple-300 transition-colors">
+                      zain@example.com
+                    </span>
+                  </div>
+                </a>
               </li>
               
-              <li className="flex items-start group">
-                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 mr-4 group-hover:bg-purple-900/50 transition-colors duration-300">
-                  <Phone className="w-4 h-4 text-purple-400" />
-                </div>
-                <div className="flex flex-col pt-2">
-                  <a href="tel:+921234567890" className="text-gray-400 text-sm hover:text-white transition-colors">
-                    +92 123 4567890
-                  </a>
-                </div>
+              <li>
+                <a href="tel:+921234567890" className="group flex items-start focus:outline-none">
+                  <div className="w-10 h-10 rounded-full bg-gray-800/80 border border-gray-700 flex items-center justify-center flex-shrink-0 mr-4 group-hover:bg-purple-900/40 group-hover:border-purple-500/50 transition-colors duration-300">
+                    <Phone className="w-4 h-4 text-gray-400 group-hover:text-purple-400 transition-colors" />
+                  </div>
+                  <div className="flex flex-col pt-2">
+                    <span className="text-gray-400 text-sm font-medium group-hover:text-purple-300 transition-colors">
+                      +92 123 4567890
+                    </span>
+                  </div>
+                </a>
               </li>
               
-              <li className="flex items-start group">
-                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 mr-4 group-hover:bg-purple-900/50 transition-colors duration-300">
-                  <MapPin className="w-4 h-4 text-purple-400" />
+              <li className="flex items-start">
+                <div className="w-10 h-10 rounded-full bg-gray-800/80 border border-gray-700 flex items-center justify-center flex-shrink-0 mr-4">
+                  <MapPin className="w-4 h-4 text-gray-400" />
                 </div>
                 <div className="flex flex-col pt-2">
-                  <span className="text-gray-400 text-sm">
+                  <span className="text-gray-400 text-sm font-medium">
                     Lahore, PK
                   </span>
                 </div>
@@ -176,18 +180,18 @@ const Footer = () => {
         </div>
         
         {/* Footer Bottom / Copyright */}
-        <div className="border-t border-gray-800/80 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm font-medium" data-aos="fade-right">
+        <div className="border-t border-gray-800/80 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-gray-500 text-sm font-medium text-center md:text-left" data-aos="fade-right">
             &copy; {new Date().getFullYear()} Zain Murtaza. All rights reserved.
           </p>
           
           <button
             onClick={scrollToTop}
             aria-label="Scroll back to top"
-            className="group flex items-center space-x-2 bg-gray-800/50 hover:bg-gray-700 px-4 py-2 rounded-full text-gray-400 hover:text-white transition-all duration-300 border border-gray-700 hover:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="group flex items-center space-x-2 bg-gray-800/40 hover:bg-gray-800 px-5 py-2.5 rounded-full text-gray-400 hover:text-white transition-all duration-300 border border-gray-700 hover:border-purple-500 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900"
             data-aos="fade-left"
           >
-            <span className="text-sm font-medium">Back to Top</span>
+            <span className="text-sm font-semibold tracking-wide">Back to Top</span>
             <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform duration-300" />
           </button>
         </div>
