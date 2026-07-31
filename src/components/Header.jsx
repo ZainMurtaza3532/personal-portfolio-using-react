@@ -1,18 +1,16 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun } from 'lucide-react';
 import logo from '/public/images/abc.png'; 
 
 const Logo = () => {
   return (
     <a href="#home" className="flex items-center group focus:outline-none" data-aos="fade-right">
-      <div className="relative overflow-hidden rounded-full p-1">
-        <img
-          src={logo}
-          alt="Zain Logo"
-          className="w-10 h-10 md:w-12 md:h-12 object-contain transform group-hover:scale-110 transition-transform duration-500"
-        />
-      </div>
-      <span className="text-2xl md:text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 ml-2 tracking-tight group-hover:from-pink-600 group-hover:to-purple-600 transition-all duration-500">
+      <img
+        src={logo}
+        alt="Zain Logo"
+        className="w-10 h-10 md:w-12 md:h-12 object-contain group-hover:scale-105 transition-transform duration-300"
+      />
+      <span className="text-xl md:text-2xl font-extrabold text-white ml-2 tracking-tight hidden lg:block">
         ZAIN
       </span>
     </a>
@@ -41,7 +39,6 @@ const Header = () => {
       setIsScrolled(window.scrollY > 20);
       
       const sections = ['home', 'about', 'skills', 'education', 'projects', 'team', 'contact'];
-      // Offset by 150px to trigger the active state slightly before the section hits the exact top
       const scrollPosition = window.scrollY + 150; 
       
       for (const section of sections) {
@@ -72,7 +69,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768 && isMenuOpen) {
+      if (window.innerWidth >= 1024 && isMenuOpen) {
         setIsMenuOpen(false);
       }
     };
@@ -80,7 +77,6 @@ const Header = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [isMenuOpen]);
 
-  // Close menu on Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isMenuOpen) {
@@ -102,99 +98,92 @@ const Header = () => {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out border-b ${
-        isScrolled 
-          ? 'bg-white/70 backdrop-blur-lg shadow-[0_4px_30px_rgba(0,0,0,0.05)] border-white/20 py-3' 
-          : 'bg-transparent border-transparent py-5 lg:py-6'
-      }`}
-      data-aos="fade-down"
-      data-aos-duration="800"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          
-          {/* Logo */}
+    <header className="fixed top-4 md:top-6 left-0 right-0 z-50 flex justify-center px-4 w-full" data-aos="fade-down" data-aos-duration="800">
+      
+      {/* Floating Pill Container (Matches Screenshot) */}
+      <div className={`relative flex items-center justify-between lg:justify-center p-1.5 md:p-2 rounded-full transition-all duration-300 w-full max-w-7xl lg:w-auto ${
+        isScrolled || isMenuOpen
+          ? 'bg-[#2a2a2a]/85 backdrop-blur-md shadow-2xl border border-white/10' 
+          : 'bg-[#2a2a2a]/60 backdrop-blur-sm border border-transparent'
+      }`}>
+        
+        {/* Mobile Logo (Visible only on small screens within the pill) */}
+        <div className="lg:hidden pl-2">
           <Logo />
+        </div>
+
+        {/* Desktop Nav */}
+        <nav className="hidden lg:flex items-center">
+          {navItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={(e) => scrollToSection(e, item.href, item.id)}
+              aria-current={activeSection === item.id ? 'page' : undefined}
+              className={`px-6 py-2.5 rounded-full text-[15px] font-medium transition-all duration-300 ${
+                activeSection === item.id
+                  ? 'bg-[#9300ff] text-white shadow-md' // The bright purple from your screenshot
+                  : 'text-gray-300 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              {item.name}
+            </a>
+          ))}
+
+          {/* Divider line matching screenshot */}
+          <div className="w-[1px] h-8 bg-gray-500/40 mx-2"></div>
           
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => scrollToSection(e, item.href, item.id)}
-                aria-current={activeSection === item.id ? 'page' : undefined}
-                className="relative group px-4 py-2 text-sm font-semibold transition-all duration-300 focus:outline-none"
-              >
-                <span className={`transition-colors duration-300 ${
-                  activeSection === item.id
-                    ? 'text-purple-600'
-                    : 'text-gray-600 group-hover:text-purple-500'
-                }`}>
-                  {item.name}
-                </span>
-                
-                {/* Animated Bottom Line */}
-                <span 
-                  className={`absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 ease-out transform -translate-x-1/2 rounded-full ${
-                    activeSection === item.id 
-                      ? 'w-[80%] opacity-100' 
-                      : 'w-0 opacity-0 group-hover:w-[80%] group-hover:opacity-100'
-                  }`}
-                />
-              </a>
-            ))}
-          </nav>
-          
-          {/* Mobile Menu Toggle */}
+          {/* Theme Toggle matching screenshot (White circle with purple sun) */}
+          <button 
+            className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#9300ff] hover:scale-105 transition-transform"
+            aria-label="Toggle Theme"
+          >
+            <Sun className="w-5 h-5" />
+          </button>
+        </nav>
+
+        {/* Mobile Menu Actions */}
+        <div className="flex items-center gap-2 lg:hidden pr-1">
+          <button 
+            className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#9300ff]"
+            aria-label="Toggle Theme"
+          >
+            <Sun className="w-5 h-5" />
+          </button>
           <button
-            className={`md:hidden relative z-50 p-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500/50 ${
-              isScrolled 
-                ? 'bg-white/50 text-gray-800 hover:bg-white/80' 
-                : 'text-gray-800 hover:bg-white/20'
-            }`}
+            className="p-2 rounded-full text-white hover:bg-white/10 transition-colors focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-expanded={isMenuOpen}
             aria-label="Toggle navigation menu"
           >
-            <div className="relative w-6 h-6 flex items-center justify-center">
-              <span className={`absolute transition-all duration-300 ${isMenuOpen ? 'opacity-0 rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'}`}>
-                <Menu className="w-6 h-6" />
-              </span>
-              <span className={`absolute transition-all duration-300 ${isMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'}`}>
-                <X className="w-6 h-6" />
-              </span>
-            </div>
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
-        
-        {/* Mobile Nav Dropdown */}
-        <div 
-          className={`md:hidden absolute top-[110%] left-4 right-4 rounded-2xl bg-white/90 backdrop-blur-xl shadow-2xl border border-white/50 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden origin-top ${
-            isMenuOpen 
-              ? 'opacity-100 scale-y-100 translate-y-0 visible pointer-events-auto' 
-              : 'opacity-0 scale-y-95 -translate-y-4 invisible pointer-events-none'
-          }`}
-        >
-          <nav className="p-3 space-y-1 flex flex-col">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => scrollToSection(e, item.href, item.id)}
-                aria-current={activeSection === item.id ? 'page' : undefined}
-                className={`flex items-center w-full px-5 py-3 rounded-xl transition-all duration-300 text-base font-semibold ${
-                  activeSection === item.id
-                    ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600 shadow-sm'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-purple-500'
-                }`}
-              >
-                {item.name}
-              </a>
-            ))}
-          </nav>
-        </div>
+      </div>
+
+      {/* Mobile Nav Dropdown */}
+      <div 
+        className={`lg:hidden absolute top-[110%] left-4 right-4 rounded-3xl bg-[#2a2a2a]/95 backdrop-blur-xl shadow-2xl border border-white/10 transition-all duration-300 overflow-hidden ${
+          isMenuOpen ? 'opacity-100 scale-y-100 translate-y-0 visible' : 'opacity-0 scale-y-95 -translate-y-4 invisible'
+        } origin-top`}
+      >
+        <nav className="p-4 flex flex-col space-y-1">
+          {navItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={(e) => scrollToSection(e, item.href, item.id)}
+              aria-current={activeSection === item.id ? 'page' : undefined}
+              className={`block w-full px-5 py-3.5 rounded-2xl transition-colors text-base font-medium ${
+                activeSection === item.id
+                  ? 'bg-[#9300ff] text-white shadow-sm'
+                  : 'text-gray-300 hover:bg-white/10 hover:text-white'
+              }`}
+            >
+              {item.name}
+            </a>
+          ))}
+        </nav>
       </div>
     </header>
   );
