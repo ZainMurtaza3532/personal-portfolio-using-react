@@ -29,7 +29,6 @@ const Header = () => {
     { name: 'Skills', href: '#skills', id: 'skills' },
     { name: 'Education', href: '#education', id: 'education' },
     { name: 'Projects', href: '#projects', id: 'projects' },
-    { name: 'Team', href: '#team', id: 'team' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
@@ -38,7 +37,7 @@ const Header = () => {
     rafRef.current = requestAnimationFrame(() => {
       setIsScrolled(window.scrollY > 20);
       
-      const sections = ['home', 'about', 'skills', 'education', 'projects', 'team', 'contact'];
+      const sections = ['home', 'about', 'skills', 'education', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 150; 
       
       for (const section of sections) {
