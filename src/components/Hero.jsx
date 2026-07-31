@@ -135,17 +135,18 @@ const Hero = () => {
             </div>
           </div>
           
-         {/* Right Image */}
+      {/* Right Image */}
 <div className="lg:w-1/2 flex justify-center mt-12 lg:mt-0" data-aos="fade-left" data-aos-duration="1200">
   
-  {/* The wrapper strictly dictates the size so absolute children (like the ring) position correctly */}
-  <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
+  {/* The wrapper strictly dictates the size. Made slightly taller for a portrait look. */}
+  <div className="relative w-64 h-72 sm:w-72 sm:h-80 lg:w-96 lg:h-[30rem]">
     
-    {/* Decorative Background Ring */}
-    <div className="absolute inset-0 rounded-full border-2 border-purple-200/60 scale-[1.08] lg:scale-[1.06] z-0 transition-transform duration-700 hover:scale-[1.10]"></div>
+    {/* Decorative Background Offset Layer */}
+    {/* Uses an offset (translate) instead of scale for a cleaner geometric look */}
+    <div className="absolute inset-0 rounded-[2.5rem] border-2 border-purple-300/80 translate-x-3 translate-y-3 lg:translate-x-5 lg:translate-y-5 z-0 transition-transform duration-700 hover:translate-x-6 hover:translate-y-6"></div>
     
     {/* Main Image Container */}
-    <div className="w-full h-full rounded-full overflow-hidden border-8 border-white shadow-2xl relative z-10 bg-white" data-aos="zoom-in" data-aos-delay="300">
+    <div className="w-full h-full rounded-[2.5rem] overflow-hidden border-8 border-white shadow-2xl relative z-10 bg-white" data-aos="zoom-in" data-aos-delay="300">
       <img
         src="/img.png"
         alt="Zain Murtaza - Web Developer"
@@ -156,8 +157,9 @@ const Hero = () => {
     {/* Floating Elements */}
     
     {/* Code Icon (Top Right) */}
+    {/* Slightly adjusted positioning to sit well on the new angled corners */}
     <div 
-      className="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white shadow-xl animate-float z-20" 
+      className="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white shadow-xl animate-float z-20" 
       data-aos="zoom-in" 
       data-aos-delay="500"
     >
@@ -176,7 +178,7 @@ const Hero = () => {
     
     {/* Zap Icon (Middle Right) */}
     <div 
-      className="absolute top-1/2 -right-6 lg:-right-10 w-12 h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white shadow-xl animate-float z-20 transform -translate-y-1/2" 
+      className="absolute top-1/2 -right-6 lg:-right-8 w-12 h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white shadow-xl animate-float z-20 transform -translate-y-1/2" 
       data-aos="zoom-in" 
       data-aos-delay="900" 
       style={{ animationDelay: '2s' }}
