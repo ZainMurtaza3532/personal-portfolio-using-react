@@ -8,7 +8,6 @@ import Skills from './components/Skills';
 import Education from './components/Education'; 
 import Projects from './components/Projects';
 import Contact from './components/Contact';
-import Team from './components/Team'; 
 import Footer from './components/Footer';
 
 function App() {
@@ -46,7 +45,6 @@ function App() {
         <Skills />
         <Education />  
         <Projects />
-        <Team /> 
         <Contact />
       </main>
       <Footer />
