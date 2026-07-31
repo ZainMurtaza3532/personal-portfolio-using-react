@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Sparkles } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -28,26 +28,26 @@ const Contact = () => {
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       
-      // Reset status after 3 seconds
-      setTimeout(() => setSubmitStatus('idle'), 3000);
-    }, 1000);
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    }, 1500);
   };
 
   const contactInfo = [
     {
-      icon: <Mail className="w-6 h-6" />,
+      icon: <Mail className="w-5 h-5" />,
       title: 'Email',
       value: 'zain@example.com',
-      link: 'mailto:john@example.com'
+      link: 'mailto:zain@example.com'
     },
     {
-      icon: <Phone className="w-6 h-6" />,
+      icon: <Phone className="w-5 h-5" />,
       title: 'Phone',
       value: '+92 123 4567890',
-      link: 'tel:+15551234567'
+      link: 'tel:+921234567890'
     },
     {
-      icon: <MapPin className="w-6 h-6" />,
+      icon: <MapPin className="w-5 h-5" />,
       title: 'Location',
       value: 'Lahore, PK',
       link: 'https://maps.google.com'
@@ -56,53 +56,69 @@ const Contact = () => {
 
   const socialLinks = [
     {
-      icon: <Github className="w-6 h-6" />,
+      icon: <Github className="w-5 h-5" />,
       name: 'GitHub',
-      url: 'https://github.com'
+      url: 'https://github.com',
+      hoverClass: 'hover:bg-gray-900'
     },
     {
-      icon: <Linkedin className="w-6 h-6" />,
+      icon: <Linkedin className="w-5 h-5" />,
       name: 'LinkedIn',
-      url: 'https://linkedin.com'
+      url: 'https://linkedin.com',
+      hoverClass: 'hover:bg-[#0A66C2]'
     },
     {
-      icon: <Twitter className="w-6 h-6" />,
+      icon: <Twitter className="w-5 h-5" />,
       name: 'Twitter',
-      url: 'https://twitter.com'
+      url: 'https://twitter.com',
+      hoverClass: 'hover:bg-[#1DA1F2]'
     }
   ];
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-gray-200">
-      <div className="max-w-7xl mx-auto">
+    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50 via-white to-purple-50 overflow-hidden relative">
+      <div className="max-w-7xl mx-auto relative z-10">
+        
+        {/* Section Header */}
         <div className="text-center mb-16" data-aos="fade-up">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-            Get In Touch
+          <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            Get In <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Touch</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto rounded-full mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="w-24 h-1.5 bg-gradient-to-r from-purple-600 to-pink-500 mx-auto rounded-full mb-6"></div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Have a project in mind or want to collaborate? I'd love to hear from you.
           </p>
         </div>
         
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+          
           {/* Contact Form */}
-          <div className="card-beautiful" data-aos="fade-right" data-aos-duration="1200">
-            <h3 className="text-2xl font-bold text-gray-800 mb-6" data-aos="fade-down" data-aos-delay="100">
+          <div 
+            className="bg-white/80 backdrop-blur-xl rounded-3xl p-8 sm:p-10 shadow-xl border border-gray-100" 
+            data-aos="fade-right" 
+            data-aos-duration="1200"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
               Send me a message
+              <Sparkles className="w-5 h-5 text-purple-500 ml-2" />
             </h3>
             
             {submitStatus === 'success' && (
-              <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg" data-aos="fade-down">
-                Thank you for your message! I'll get back to you soon.
+              <div className="mb-8 p-4 bg-green-50 border border-green-200 text-green-700 rounded-2xl flex items-start" data-aos="fade-down">
+                <div className="bg-green-100 rounded-full p-1 mr-3 flex-shrink-0">
+                  <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <p className="font-medium">Thank you for your message! I'll get back to you as soon as possible.</p>
               </div>
             )}
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
-                <div data-aos="fade-right" data-aos-delay="200">
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Name *
+                <div>
+                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Name <span className="text-purple-600">*</span>
                   </label>
                   <input
                     type="text"
@@ -111,13 +127,13 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="input-beautiful w-full"
-                    placeholder="Your name"
+                    className="w-full px-5 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 placeholder-gray-400"
+                    placeholder="John Doe"
                   />
                 </div>
-                <div data-aos="fade-left" data-aos-delay="200">
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email *
+                <div>
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Email <span className="text-purple-600">*</span>
                   </label>
                   <input
                     type="email"
@@ -126,15 +142,15 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="input-beautiful w-full"
-                    placeholder="your@email.com"
+                    className="w-full px-5 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 placeholder-gray-400"
+                    placeholder="john@example.com"
                   />
                 </div>
               </div>
               
-              <div data-aos="fade-up" data-aos-delay="300">
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                  Subject *
+              <div>
+                <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Subject <span className="text-purple-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -143,14 +159,14 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="input-beautiful w-full"
+                  className="w-full px-5 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 placeholder-gray-400"
                   placeholder="What's this about?"
                 />
               </div>
               
-              <div data-aos="fade-up" data-aos-delay="400">
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Message *
+              <div>
+                <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Message <span className="text-purple-600">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -158,8 +174,8 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows={6}
-                  className="input-beautiful w-full resize-none"
+                  rows={5}
+                  className="w-full px-5 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 placeholder-gray-400 resize-none"
                   placeholder="Tell me about your project..."
                 ></textarea>
               </div>
@@ -167,18 +183,16 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-modern w-full flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                data-aos="fade-up"
-                data-aos-delay="500"
+                className="group w-full flex items-center justify-center space-x-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
               >
                 {isSubmitting ? (
                   <>
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Sending...</span>
+                    <span>Sending Message...</span>
                   </>
                 ) : (
                   <>
-                    <Send className="w-5 h-5" />
+                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     <span>Send Message</span>
                   </>
                 )}
@@ -187,73 +201,72 @@ const Contact = () => {
           </div>
           
           {/* Contact Info */}
-          <div className="space-y-8" data-aos="fade-left" data-aos-duration="1200">
-            <div data-aos="fade-down" data-aos-delay="100">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">
+          <div className="space-y-10 flex flex-col justify-center" data-aos="fade-left" data-aos-duration="1200">
+            <div>
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">
                 Let's connect
               </h3>
-              <p className="text-gray-600 mb-8 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed text-lg">
                 I'm always open to discussing new opportunities, creative projects, 
                 or just having a friendly chat about technology and development.
               </p>
             </div>
             
             {/* Contact Details */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               {contactInfo.map((info, index) => (
                 <a
                   key={index}
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
                   rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="flex items-center space-x-4 p-4 card-beautiful hover:transform hover:scale-105 transition-all duration-300"
+                  className="group flex items-center p-5 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
                   data-aos="fade-up"
-                  data-aos-delay={200 + index * 100}
+                  data-aos-delay={index * 100}
                 >
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg flex items-center justify-center text-white">
+                  <div className="w-14 h-14 bg-purple-50 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 rounded-xl flex items-center justify-center text-purple-600 group-hover:text-white transition-all duration-300 shadow-sm mr-5">
                     {info.icon}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">{info.title}</h4>
-                    <p className="text-gray-600">{info.value}</p>
+                    <h4 className="font-semibold text-gray-500 text-sm tracking-wider uppercase mb-1">{info.title}</h4>
+                    <p className="text-gray-900 font-bold text-lg group-hover:text-purple-600 transition-colors">{info.value}</p>
                   </div>
                 </a>
               ))}
             </div>
             
-            {/* Social Links */}
-            <div data-aos="fade-up" data-aos-delay="500">
-              <h4 className="text-lg font-semibold text-gray-800 mb-4">
+            {/* Social Links & Availability */}
+            <div className="pt-6 border-t border-gray-200">
+              <h4 className="text-lg font-semibold text-gray-900 mb-5">
                 Follow me on social media
               </h4>
-              <div className="flex space-x-4">
+              <div className="flex flex-wrap gap-4 mb-8">
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center text-gray-600 hover:text-white hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-110"
+                    className={`w-12 h-12 bg-white border border-gray-100 rounded-xl shadow-sm flex items-center justify-center text-gray-600 hover:text-white ${social.hoverClass} transition-all duration-300 hover:-translate-y-1 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500`}
                     title={social.name}
-                    data-aos="zoom-in"
-                    data-aos-delay={600 + index * 100}
+                    aria-label={`Visit my ${social.name}`}
                   >
                     {social.icon}
                   </a>
                 ))}
               </div>
+              
+              {/* Availability Badge */}
+              <div className="inline-flex items-center p-1.5 pr-5 bg-green-50 border border-green-200 rounded-full">
+                <span className="flex items-center justify-center w-8 h-8 bg-green-100 rounded-full mr-3">
+                  <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
+                </span>
+                <span className="text-green-800 font-medium text-sm">
+                  Available for new projects
+                </span>
+              </div>
             </div>
             
-            {/* Availability */}
-            <div className="card-beautiful p-6" data-aos="fade-up" data-aos-delay="700">
-              <h4 className="font-semibold text-gray-800 mb-2">
-                🚀 Available for new projects
-              </h4>
-              <p className="text-gray-600 text-sm">
-                I'm currently accepting new freelance projects and full-time opportunities. 
-                Let's discuss how we can work together!
-              </p>
-            </div>
           </div>
         </div>
       </div>
