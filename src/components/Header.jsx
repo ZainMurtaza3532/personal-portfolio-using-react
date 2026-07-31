@@ -5,12 +5,14 @@ import logo from '/public/images/abc.png';
 const Logo = () => {
   return (
     <a href="#home" className="flex items-center group focus:outline-none" data-aos="fade-right">
-      <img
-        src={logo}
-        alt="Zain Logo"
-        className="w-12 h-12 md:w-14 md:h-14 object-contain group-hover:scale-105 transition-transform duration-300"
-      />
-      <span className="text-2xl md:text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 ml-2 tracking-tight">
+      <div className="relative overflow-hidden rounded-full p-1">
+        <img
+          src={logo}
+          alt="Zain Logo"
+          className="w-10 h-10 md:w-12 md:h-12 object-contain transform group-hover:scale-110 transition-transform duration-500"
+        />
+      </div>
+      <span className="text-2xl md:text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 ml-2 tracking-tight group-hover:from-pink-600 group-hover:to-purple-600 transition-all duration-500">
         ZAIN
       </span>
     </a>
@@ -59,7 +61,6 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // Initial check in case the user refreshes halfway down the page
     handleScroll(); 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -102,10 +103,10 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out border-b ${
         isScrolled 
-          ? 'bg-white/85 backdrop-blur-md shadow-sm border-gray-200 py-3' 
-          : 'bg-transparent border-transparent py-5'
+          ? 'bg-white/70 backdrop-blur-lg shadow-[0_4px_30px_rgba(0,0,0,0.05)] border-white/20 py-3' 
+          : 'bg-transparent border-transparent py-5 lg:py-6'
       }`}
       data-aos="fade-down"
       data-aos-duration="800"
@@ -117,54 +118,76 @@ const Header = () => {
           <Logo />
           
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center space-x-2">
+          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href, item.id)}
                 aria-current={activeSection === item.id ? 'page' : undefined}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
-                  activeSection === item.id
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md'
-                    : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'
-                }`}
+                className="relative group px-4 py-2 text-sm font-semibold transition-all duration-300 focus:outline-none"
               >
-                {item.name}
+                <span className={`transition-colors duration-300 ${
+                  activeSection === item.id
+                    ? 'text-purple-600'
+                    : 'text-gray-600 group-hover:text-purple-500'
+                }`}>
+                  {item.name}
+                </span>
+                
+                {/* Animated Bottom Line */}
+                <span 
+                  className={`absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-300 ease-out transform -translate-x-1/2 rounded-full ${
+                    activeSection === item.id 
+                      ? 'w-[80%] opacity-100' 
+                      : 'w-0 opacity-0 group-hover:w-[80%] group-hover:opacity-100'
+                  }`}
+                />
               </a>
             ))}
           </nav>
           
           {/* Mobile Menu Toggle */}
           <button
-            className={`md:hidden p-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 ${
-              isScrolled ? 'text-gray-800 hover:bg-gray-100' : 'text-gray-800 hover:bg-gray-100'
+            className={`md:hidden relative z-50 p-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500/50 ${
+              isScrolled 
+                ? 'bg-white/50 text-gray-800 hover:bg-white/80' 
+                : 'text-gray-800 hover:bg-white/20'
             }`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-expanded={isMenuOpen}
             aria-label="Toggle navigation menu"
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <div className="relative w-6 h-6 flex items-center justify-center">
+              <span className={`absolute transition-all duration-300 ${isMenuOpen ? 'opacity-0 rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'}`}>
+                <Menu className="w-6 h-6" />
+              </span>
+              <span className={`absolute transition-all duration-300 ${isMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'}`}>
+                <X className="w-6 h-6" />
+              </span>
+            </div>
           </button>
         </div>
         
-        {/* Mobile Nav */}
+        {/* Mobile Nav Dropdown */}
         <div 
-          className={`md:hidden absolute top-full left-0 right-0 w-full bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100 transition-all duration-300 overflow-hidden ${
-            isMenuOpen ? 'max-h-96 opacity-100 visible' : 'max-h-0 opacity-0 invisible'
+          className={`md:hidden absolute top-[110%] left-4 right-4 rounded-2xl bg-white/90 backdrop-blur-xl shadow-2xl border border-white/50 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden origin-top ${
+            isMenuOpen 
+              ? 'opacity-100 scale-y-100 translate-y-0 visible pointer-events-auto' 
+              : 'opacity-0 scale-y-95 -translate-y-4 invisible pointer-events-none'
           }`}
         >
-          <nav className="px-4 py-4 space-y-2 flex flex-col">
+          <nav className="p-3 space-y-1 flex flex-col">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href, item.id)}
                 aria-current={activeSection === item.id ? 'page' : undefined}
-                className={`block w-full px-5 py-3 rounded-xl transition-colors text-base font-medium ${
+                className={`flex items-center w-full px-5 py-3 rounded-xl transition-all duration-300 text-base font-semibold ${
                   activeSection === item.id
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-sm'
-                    : 'text-gray-700 hover:bg-purple-50 hover:text-purple-600'
+                    ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600 shadow-sm'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-purple-500'
                 }`}
               >
                 {item.name}
