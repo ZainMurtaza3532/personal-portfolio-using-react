@@ -1,47 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowDown, Github, Linkedin, Mail, Twitter, Code, Palette, Zap } from 'lucide-react';
 
-// 1. Optimization: Moved configuration array outside the component 
-// to prevent recreation on every re-render.
 const SOCIAL_LINKS = [
-  { 
-    icon: <Github className="w-5 h-5" />, 
-    label: 'GitHub', 
-    color: 'hover:bg-gray-900 hover:text-white hover:border-gray-900',
-    link: "https://github.com/ZainMurtaza3532"
-  },
-  { 
-    icon: <Linkedin className="w-5 h-5" />, 
-    label: 'LinkedIn', 
-    color: 'hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2]',
-    link: "https://www.linkedin.com/in/zain-murtaza-ghulam-murtaza-185a67304/"
-  },
-  { 
-    icon: <Twitter className="w-5 h-5" />, 
-    label: 'Twitter', 
-    color: 'hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2]',
-    link: "#"
-  },
-  { 
-    icon: <Mail className="w-5 h-5" />, 
-    label: 'Email', 
-    color: 'hover:bg-[#EA4335] hover:text-white hover:border-[#EA4335]',
-    link: "mailto:your.email@example.com"
-  }
+  { icon: <Github className="w-5 h-5" />, label: 'GitHub', color: 'hover:bg-gray-900 hover:text-white', link: "https://github.com/ZainMurtaza3532" },
+  { icon: <Linkedin className="w-5 h-5" />, label: 'LinkedIn', color: 'hover:bg-[#0A66C2] hover:text-white', link: "https://www.linkedin.com/in/zain-murtaza-ghulam-murtaza-185a67304/" },
+  { icon: <Twitter className="w-5 h-5" />, label: 'Twitter', color: 'hover:bg-[#1DA1F2] hover:text-white', link: "#" },
+  { icon: <Mail className="w-5 h-5" />, label: 'Email', color: 'hover:bg-[#EA4335] hover:text-white', link: "mailto:your.email@example.com" }
 ];
 
-const Hero = () => {
-  // 2. Fallback Height: Initializing with a standard 80px fallback to prevent Cumulative Layout Shift (CLS)
+const HeroSplitLayout = () => {
   const [headerHeight, setHeaderHeight] = useState(80);
 
   useEffect(() => {
     const header = document.querySelector('header');
     if (!header) return;
     
-    const updateHeight = () => {
-      setHeaderHeight(header.offsetHeight);
-    };
-
+    const updateHeight = () => setHeaderHeight(header.offsetHeight);
     updateHeight();
     
     const resizeObserver = new ResizeObserver(updateHeight);
@@ -49,7 +23,7 @@ const Hero = () => {
     
     return () => resizeObserver.disconnect();
   }, []);
-  
+
   const handleScrollTo = (e, targetId) => {
     e.preventDefault();
     const targetSection = document.querySelector(targetId);
@@ -61,141 +35,120 @@ const Hero = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-white selection:bg-purple-200"
+      className="min-h-screen w-full bg-slate-50 flex flex-col justify-between overflow-hidden relative"
       style={{ paddingTop: `${headerHeight}px` }}
     >
-      {/* Background Gradient & Animated Blobs */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 pointer-events-none">
-        <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]"></div>
+      {/* Main Split Content Container */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 my-auto py-12">
         
-        {/* Decorative background blobs */}
-        <div className="absolute top-20 left-10 md:left-20 w-72 h-72 md:w-96 md:h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob"></div>
-        <div className="absolute top-40 right-10 md:right-20 w-72 h-72 md:w-96 md:h-96 bg-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-20 md:left-40 w-72 h-72 md:w-96 md:h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-4000"></div>
-      </div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 lg:py-24">
-        <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-16">
-          
-          {/* Left Content */}
-          <div className="lg:w-1/2 text-center lg:text-left flex flex-col items-center lg:items-start" data-aos="fade-right" data-aos-duration="1200">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-4 tracking-tight leading-none">
-              Hi, I'm <br className="hidden lg:block" />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 bg-[length:200%_auto] animate-gradient-text">
-                Zain Murtaza
-              </span>
-            </h1>
-            
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-700 mb-6" data-aos="fade-right" data-aos-delay="150">
-              Creative Web Developer
-            </h2>
-            
-            <p className="text-lg text-gray-600 mb-10 max-w-xl leading-relaxed" data-aos="fade-right" data-aos-delay="250">
-              I craft beautiful, responsive web experiences with modern technologies. 
-              Passionate about clean code, intuitive design, and bringing digital ideas to life.
-            </p>
-            
-            {/* Social Icons */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10" data-aos="fade-right" data-aos-delay="350">
-              {SOCIAL_LINKS.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-12 h-12 md:w-14 md:h-14 bg-white border border-gray-100 rounded-full flex items-center justify-center text-gray-600 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${social.color}`}
-                  aria-label={social.label}
-                  data-aos="zoom-in"
-                  data-aos-delay={400 + index * 50}
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
-            
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto" data-aos="fade-right" data-aos-delay="450">
-              <button
-                onClick={(e) => handleScrollTo(e, '#about')}
-                className="group px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-full shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2 text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-              >
-                <span>Explore My Work</span>
-                <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" />
-              </button>
-              
-              <button
-                onClick={(e) => handleScrollTo(e, '#contact')}
-                className="group px-8 py-4 bg-white text-gray-700 font-semibold rounded-full border border-gray-200 hover:border-purple-300 hover:text-purple-600 transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center gap-2 text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-              >
-                <span>Get In Touch</span>
-                <Mail className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-              </button>
-            </div>
+        {/* Left Side: Dynamic Text & Actions Panel */}
+        <div className="lg:col-span-7 flex flex-col justify-center space-y-6" data-aos="fade-right" data-aos-duration="1000">
+          <div className="inline-flex items-center gap-2 bg-purple-50 border border-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium w-fit">
+            <Zap className="w-4 h-4 fill-purple-100" /> Available for Freeland & Full-time Roles
           </div>
           
-          {/* Right Image */}
-          <div className="lg:w-1/2 flex justify-center mt-8 lg:mt-0" data-aos="fade-left" data-aos-duration="1200">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-none">
+            Creating Digital Experiences That <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600">
+              Matter.
+            </span>
+          </h1>
+          
+          <p className="text-lg text-slate-600 max-w-xl leading-relaxed">
+            Hi, I'm <strong className="text-slate-800 font-semibold">Zain Murtaza</strong>, a Creative Web Developer based in Pakistan. I combine clean architecture with intuitive interactive designs to construct seamless web solutions.
+          </p>
+
+          {/* CTA Group */}
+          <div className="flex flex-wrap gap-4 pt-2">
+            <button
+              onClick={(e) => handleScrollTo(e, '#about')}
+              className="px-8 py-3.5 bg-slate-950 text-white font-medium rounded-xl shadow-md hover:bg-slate-800 transition-all duration-200 flex items-center gap-2"
+            >
+              <span>View Portfolio</span>
+              <ArrowDown className="w-4 h-4" />
+            </button>
+            <button
+              onClick={(e) => handleScrollTo(e, '#contact')}
+              className="px-8 py-3.5 bg-white text-slate-700 border border-slate-200 font-medium rounded-xl hover:bg-slate-50 transition-all duration-200"
+            >
+              Get In Touch
+            </button>
+          </div>
+        </div>
+
+        {/* Right Side: Structured Framed Graphic Showcase */}
+        <div className="lg:col-span-5 flex items-center justify-center lg:justify-end" data-aos="fade-left" data-aos-duration="1000">
+          <div className="relative w-full max-w-[400px] aspect-square">
+            
+            {/* Geometric Background accent card */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-purple-600 to-pink-500 rounded-3xl rotate-6 scale-95 opacity-10 blur-sm"></div>
+            
+            {/* Main Visual Box Frame */}
+            <div className="w-full h-full bg-white border border-slate-200/80 rounded-3xl p-4 shadow-xl relative z-10 flex flex-col justify-between">
               
-              {/* Decorative Background Ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-purple-200/60 scale-[1.08] lg:scale-[1.06] z-0 transition-transform duration-700 hover:scale-[1.12]"></div>
+              {/* Fake Window Controls Header */}
+              <div className="flex items-center gap-1.5 pb-3 border-b border-slate-100">
+                <span className="w-3 h-3 rounded-full bg-rose-400"></span>
+                <span className="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span className="w-3 h-3 rounded-full bg-emerald-400"></span>
+              </div>
               
-              {/* Main Image Container */}
-              <div className="w-full h-full rounded-full overflow-hidden border-8 border-white shadow-2xl relative z-10 bg-gray-50" data-aos="zoom-in" data-aos-delay="200">
+              {/* Image Frame Canvas */}
+              <div className="w-full flex-grow my-4 rounded-xl overflow-hidden bg-slate-100 border border-slate-100 relative group">
                 <img
                   src="/img.png"
-                  alt="Zain Murtaza"
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  loading="eager"
+                  alt="Zain Murtaza Portfolio Showcase"
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
+                
+                {/* Micro tech chips on picture */}
+                <div className="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-lg text-xs text-white flex items-center gap-1.5">
+                  <Code className="w-3.5 h-3.5 text-purple-400" /> React / Tailwind
+                </div>
               </div>
-              
-              {/* Floating Badge 1: Code */}
-              <div 
-                className="absolute -top-3 -right-3 lg:-top-5 lg:-right-5 w-14 h-14 lg:w-18 lg:h-18 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white shadow-xl animate-float z-20" 
-                data-aos="zoom-in" 
-                data-aos-delay="400"
-              >
-                <Code className="w-6 h-6 lg:w-8 lg:h-8" />
-              </div>
-              
-              {/* Floating Badge 2: Palette */}
-              <div 
-                className="absolute -bottom-3 -left-3 lg:-bottom-5 lg:-left-5 w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center text-white shadow-xl animate-float z-20" 
-                data-aos="zoom-in" 
-                data-aos-delay="500" 
-                style={{ animationDelay: '-1.5s' }}
-              >
-                <Palette className="w-6 h-6 lg:w-7 lg:h-7" />
-              </div>
-              
-              {/* Floating Badge 3: Zap */}
-              <div 
-                className="absolute top-1/2 -right-5 lg:-right-8 w-12 h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white shadow-xl animate-float z-20 transform -translate-y-1/2" 
-                data-aos="zoom-in" 
-                data-aos-delay="600" 
-                style={{ animationDelay: '-3s' }}
-              >
-                <Zap className="w-5 h-5 lg:w-6 lg:h-6" />
+
+              {/* Designer Footprint Info block inside frame */}
+              <div className="flex items-center justify-between pt-2">
+                <div>
+                  <h4 className="text-sm font-bold text-slate-800">Zain Murtaza</h4>
+                  <p className="text-xs text-slate-400">UI Engineer & Developer</p>
+                </div>
+                <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center text-purple-600">
+                  <Palette className="w-4 h-4" />
+                </div>
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
-        
-        {/* Scroll Indicator */}
-        <button
-          onClick={(e) => handleScrollTo(e, '#about')}
-          className="hidden lg:flex absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 hover:text-purple-600 transition-colors animate-bounce p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500"
-          data-aos="fade-up"
-          data-aos-delay="800"
-          aria-label="Scroll to About section"
-        >
-          <ArrowDown className="w-6 h-6" />
-        </button>
+
+      </div>
+
+      {/* Footer Strip Container: Socials & Quick details */}
+      <div className="w-full border-t border-slate-200/60 bg-white/50 backdrop-blur-sm relative z-20 py-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-slate-500 tracking-wide uppercase">
+            © 2026 Zain Murtaza — Crafted with attention to detail
+          </p>
+          
+          <div className="flex items-center gap-2">
+            {SOCIAL_LINKS.map((social, index) => (
+              <a
+                key={index}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`w-9 h-9 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 transition-all duration-200 ${social.color}`}
+                aria-label={social.label}
+              >
+                {social.icon}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
 };
 
-export default Hero;
+export default HeroSplitLayout;
