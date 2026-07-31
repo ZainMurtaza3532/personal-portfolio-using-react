@@ -80,30 +80,36 @@ const Projects = () => {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 via-white to-gray-100">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] relative overflow-hidden selection:bg-[#9300ff]/30">
+      
+      {/* Subtle Background Ambient Glows */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#9300ff] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.15] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-pink-600 rounded-full mix-blend-screen filter blur-[150px] opacity-[0.1] pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        
         {/* Header Section */}
         <div className="text-center mb-16" data-aos="fade-up">
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
-            Featured Projects
+          <h2 className="text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
+            Featured <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#9300ff] to-pink-500">Projects</span>
           </h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-purple-600 to-pink-500 mx-auto rounded-full mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <div className="w-24 h-1.5 bg-gradient-to-r from-[#9300ff] to-pink-500 mx-auto rounded-full mb-6 shadow-[0_0_15px_rgba(147,0,255,0.5)]"></div>
+          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-light">
             Showcasing my latest work, technical experiments, and creative solutions.
           </p>
         </div>
         
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up" data-aos-delay="100">
+        <div className="flex flex-wrap justify-center gap-3 mb-16" data-aos="fade-up" data-aos-delay="100">
           {filters.map((filter, index) => (
             <button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id)}
               aria-pressed={activeFilter === filter.id}
-              className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+              className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all duration-300 focus:outline-none backdrop-blur-md ${
                 activeFilter === filter.id
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md transform scale-105'
-                  : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 hover:border-purple-300 hover:text-purple-600'
+                  ? 'bg-[#9300ff] text-white shadow-[0_0_20px_rgba(147,0,255,0.4)] border border-[#9300ff]'
+                  : 'bg-white/5 text-gray-400 border border-white/10 hover:border-[#9300ff]/50 hover:text-white'
               }`}
               data-aos="zoom-in"
               data-aos-delay={index * 100}
@@ -118,36 +124,36 @@ const Projects = () => {
           {filteredProjects.map((project, index) => (
             <div
               key={project.title}
-              className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-500"
+              className="group flex flex-col bg-[#131313] backdrop-blur-md rounded-[2rem] overflow-hidden border border-white/10 hover:border-[#9300ff]/50 hover:shadow-[0_10px_40px_rgba(147,0,255,0.15)] transition-all duration-500 hover:-translate-y-1"
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
               {/* Image Container */}
-              <div className="relative h-56 overflow-hidden">
+              <div className="relative h-60 overflow-hidden bg-[#1a1a1a]">
                 <img
                   src={project.image}
                   alt={`Screenshot of ${project.title}`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out opacity-80 group-hover:opacity-100"
                   loading="lazy"
                 />
                 
                 {/* Featured Badge */}
                 {project.featured && (
                   <div className="absolute top-4 left-4 z-10">
-                    <span className="flex items-center gap-1 bg-white/95 text-pink-600 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm backdrop-blur-sm">
-                      <Sparkles className="w-3 h-3" />
+                    <span className="flex items-center gap-1.5 bg-[#9300ff]/20 border border-[#9300ff]/50 text-[#d48aff] text-xs font-bold px-3 py-1.5 rounded-full shadow-[0_0_15px_rgba(147,0,255,0.3)] backdrop-blur-md tracking-wide">
+                      <Sparkles className="w-3.5 h-3.5" />
                       Featured
                     </span>
                   </div>
                 )}
 
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-gray-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                <div className="absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-5">
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-900 hover:bg-purple-600 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300"
+                    className="w-12 h-12 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-[#9300ff] hover:border-transparent transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(147,0,255,0.5)]"
                     aria-label={`View live demo of ${project.title}`}
                   >
                     <ExternalLink className="w-5 h-5" />
@@ -156,7 +162,7 @@ const Projects = () => {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-900 hover:bg-purple-600 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 delay-75"
+                    className="w-12 h-12 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-[#9300ff] hover:border-transparent transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 delay-75 hover:scale-110 hover:shadow-[0_0_20px_rgba(147,0,255,0.5)]"
                     aria-label={`View source code of ${project.title}`}
                   >
                     <Github className="w-5 h-5" />
@@ -165,13 +171,13 @@ const Projects = () => {
               </div>
 
               {/* Card Content */}
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+              <div className="p-7 flex flex-col flex-grow">
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#9300ff] transition-colors duration-300">
                   {project.title}
                 </h3>
                 
-                {/* line-clamp-3 ensures uniform card heights even with long descriptions */}
-                <p className="text-gray-600 mb-6 text-sm leading-relaxed line-clamp-3" title={project.description}>
+                {/* line-clamp-3 ensures uniform card heights */}
+                <p className="text-gray-400 mb-6 text-sm leading-relaxed line-clamp-3 font-light" title={project.description}>
                   {project.description}
                 </p>
                 
@@ -181,19 +187,19 @@ const Projects = () => {
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 bg-purple-50 text-purple-700 border border-purple-100 text-xs font-medium rounded-full"
+                        className="px-3 py-1 bg-white/5 border border-white/10 text-gray-300 text-xs font-medium rounded-lg backdrop-blur-sm"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                  <div className="flex justify-between items-center pt-5 border-t border-white/10">
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-1.5 text-sm font-medium text-purple-600 hover:text-purple-800 transition-colors"
+                      className="flex items-center space-x-2 text-sm font-semibold text-[#9300ff] hover:text-[#b545ff] transition-colors"
                     >
                       <Eye className="w-4 h-4" />
                       <span>Live Demo</span>
@@ -202,7 +208,7 @@ const Projects = () => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-1.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
+                      className="flex items-center space-x-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
                     >
                       <Github className="w-4 h-4" />
                       <span>Source Code</span>
@@ -216,8 +222,8 @@ const Projects = () => {
         
         {/* Empty State Fallback */}
         {filteredProjects.length === 0 && (
-          <div className="text-center py-20 text-gray-500">
-            <p>No projects found in this category.</p>
+          <div className="text-center py-20 bg-[#131313] border border-white/10 rounded-3xl backdrop-blur-md">
+            <p className="text-gray-400 text-lg">No projects found in this category.</p>
           </div>
         )}
         
@@ -227,7 +233,7 @@ const Projects = () => {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 px-8 py-3.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+            className="inline-flex items-center space-x-2 px-8 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-semibold hover:bg-[#9300ff] hover:border-[#9300ff] transition-all duration-300 shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_30px_rgba(147,0,255,0.4)] backdrop-blur-sm hover:-translate-y-1"
           >
             <Github className="w-5 h-5" />
             <span>View More on GitHub</span>
