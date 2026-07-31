@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Github, 
   Linkedin, 
@@ -7,62 +7,74 @@ import {
   ArrowUp, 
   Phone, 
   MapPin, 
-  ChevronRight 
+  ChevronRight,
+  Send
 } from 'lucide-react';
 import logo from '/public/images/abc.png'; 
 
+// Moved static data outside the component to prevent unnecessary re-creations on render
+const socialLinks = [
+  { 
+    icon: <Github className="w-5 h-5" />, 
+    label: 'GitHub', 
+    link: "https://github.com/ZainMurtaza3532",
+    hoverClass: "hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+  },
+  { 
+    icon: <Linkedin className="w-5 h-5" />, 
+    label: 'LinkedIn', 
+    link: "https://www.linkedin.com/in/zain-murtaza-ghulam-murtaza-185a67304/",
+    hoverClass: "hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] hover:shadow-[0_0_15px_rgba(10,102,194,0.4)]"
+  },
+  { 
+    icon: <Twitter className="w-5 h-5" />, 
+    label: 'Twitter', 
+    link: "#",
+    hoverClass: "hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2] hover:shadow-[0_0_15px_rgba(29,161,242,0.4)]"
+  },
+  { 
+    icon: <Mail className="w-5 h-5" />, 
+    label: 'Email', 
+    link: "mailto:zain@example.com",
+    hoverClass: "hover:bg-[#EA4335] hover:text-white hover:border-[#EA4335] hover:shadow-[0_0_15px_rgba(234,67,53,0.4)]"
+  }
+];
+
+const footerLinks = [
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Education', href: '#education' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Team', href: '#team' },
+  { name: 'Contact', href: '#contact' },
+];
+
+const firstColumnLinks = footerLinks.slice(0, 4);
+const secondColumnLinks = footerLinks.slice(4);
+
 const Footer = () => {
+  const [email, setEmail] = useState('');
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
   };
-  
-  const socialLinks = [
-    { 
-      icon: <Github className="w-5 h-5" />, 
-      label: 'GitHub', 
-      link: "https://github.com/ZainMurtaza3532",
-      hoverClass: "hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.4)]"
-    },
-    { 
-      icon: <Linkedin className="w-5 h-5" />, 
-      label: 'LinkedIn', 
-      link: "https://www.linkedin.com/in/zain-murtaza-ghulam-murtaza-185a67304/",
-      hoverClass: "hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] hover:shadow-[0_0_15px_rgba(10,102,194,0.4)]"
-    },
-    { 
-      icon: <Twitter className="w-5 h-5" />, 
-      label: 'Twitter', 
-      link: "#",
-      hoverClass: "hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2] hover:shadow-[0_0_15px_rgba(29,161,242,0.4)]"
-    },
-    { 
-      icon: <Mail className="w-5 h-5" />, 
-      label: 'Email', 
-      link: "mailto:zain@example.com",
-      hoverClass: "hover:bg-[#EA4335] hover:text-white hover:border-[#EA4335] hover:shadow-[0_0_15px_rgba(234,67,53,0.4)]"
-    }
-  ];
-  
-  const footerLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Education', href: '#education' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Team', href: '#team' },
-    { name: 'Contact', href: '#contact' },
-  ];
-  
-  // Split footer links into two columns
-  const firstColumnLinks = footerLinks.slice(0, 4);
-  const secondColumnLinks = footerLinks.slice(4);
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    // Add your newsletter subscription logic here
+    setEmail('');
+  };
 
   return (
-    <footer className="bg-[#0a0a0a] text-white pt-20 pb-8 px-4 sm:px-6 lg:px-8 border-t border-white/10 relative overflow-hidden selection:bg-[#9300ff]/30">
+    <footer className="bg-[#0a0a0a] text-white pt-20 pb-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden selection:bg-[#9300ff]/30">
       
+      {/* Glowing Top Border */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#9300ff]/50 to-transparent"></div>
+
       {/* Subtle Background Ambient Glows */}
       <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-[#9300ff] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.1] pointer-events-none"></div>
       <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-pink-600 rounded-full mix-blend-screen filter blur-[150px] opacity-[0.05] pointer-events-none"></div>
@@ -72,7 +84,7 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8 mb-16">
           
-          {/* Brand & Description */}
+          {/* Brand, Description & Newsletter */}
           <div className="md:col-span-2" data-aos="fade-right" data-aos-duration="1000">
             <a href="#home" className="inline-flex items-center mb-6 group focus:outline-none" data-aos="fade-down" data-aos-delay="100">
               <img
@@ -89,6 +101,25 @@ const Footer = () => {
               Passionate web developer creating beautiful, responsive web experiences with modern technologies. Building the digital future, one line of code at a time.
             </p>
             
+            {/* Newsletter Subscription */}
+            <form onSubmit={handleSubscribe} className="relative max-w-md mb-8 group" data-aos="fade-up" data-aos-delay="250">
+              <input 
+                type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Subscribe to my newsletter" 
+                required
+                className="w-full bg-white/5 border border-white/10 rounded-full py-3.5 pl-5 pr-14 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#9300ff]/50 focus:ring-1 focus:ring-[#9300ff]/50 transition-all backdrop-blur-sm"
+              />
+              <button 
+                type="submit"
+                aria-label="Subscribe"
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-[#9300ff] hover:bg-[#b545ff] rounded-full flex items-center justify-center text-white transition-all shadow-[0_0_15px_rgba(147,0,255,0.4)] hover:scale-105"
+              >
+                <Send className="w-4 h-4 translate-x-[-1px] translate-y-[1px]" />
+              </button>
+            </form>
+
             {/* Social Links */}
             <div className="flex space-x-4" data-aos="fade-up" data-aos-delay="300">
               {socialLinks.map((social, index) => (
