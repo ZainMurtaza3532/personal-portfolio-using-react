@@ -135,36 +135,57 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Right Image */}
-          <div className="lg:w-1/2 flex justify-center mt-8 lg:mt-0" data-aos="fade-left" data-aos-duration="1200">
-            <div className="relative">
-              {/* Main Image Container */}
-              <div className="w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl relative z-10" data-aos="zoom-in" data-aos-delay="300">
-                <img
-                  src="/img.png"
-                  alt="Zain Murtaza - Web Developer"
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                />
-              </div>
-              
-              {/* Decorative Background Ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-purple-200 scale-[1.05] -z-0"></div>
-              
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white shadow-lg animate-float z-20" data-aos="zoom-in" data-aos-delay="500">
-                <Code className="w-8 h-8 lg:w-10 lg:h-10" />
-              </div>
-              
-              <div className="absolute -bottom-4 -left-4 lg:-bottom-6 lg:-left-6 w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white shadow-lg animate-float z-20" data-aos="zoom-in" data-aos-delay="700" style={{ animationDelay: '1s' }}>
-                <Palette className="w-6 h-6 lg:w-8 lg:h-8" />
-              </div>
-              
-              <div className="absolute top-1/2 -right-6 lg:-right-10 w-12 h-12 lg:w-14 lg:h-14 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white shadow-lg animate-float z-20" data-aos="zoom-in" data-aos-delay="900" style={{ animationDelay: '2s' }}>
-                <Zap className="w-6 h-6 lg:w-7 lg:h-7" />
-              </div>
-            </div>
-          </div>
-        </div>
+         {/* Right Image */}
+<div className="lg:w-1/2 flex justify-center mt-12 lg:mt-0" data-aos="fade-left" data-aos-duration="1200">
+  
+  {/* The wrapper strictly dictates the size so absolute children (like the ring) position correctly */}
+  <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
+    
+    {/* Decorative Background Ring */}
+    <div className="absolute inset-0 rounded-full border-2 border-purple-200/60 scale-[1.08] lg:scale-[1.06] z-0 transition-transform duration-700 hover:scale-[1.10]"></div>
+    
+    {/* Main Image Container */}
+    <div className="w-full h-full rounded-full overflow-hidden border-8 border-white shadow-2xl relative z-10 bg-white" data-aos="zoom-in" data-aos-delay="300">
+      <img
+        src="/img.png"
+        alt="Zain Murtaza - Web Developer"
+        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+      />
+    </div>
+    
+    {/* Floating Elements */}
+    
+    {/* Code Icon (Top Right) */}
+    <div 
+      className="absolute -top-6 -right-6 lg:-top-8 lg:-right-8 w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white shadow-xl animate-float z-20" 
+      data-aos="zoom-in" 
+      data-aos-delay="500"
+    >
+      <Code className="w-8 h-8 lg:w-10 lg:h-10" />
+    </div>
+    
+    {/* Palette Icon (Bottom Left) */}
+    <div 
+      className="absolute -bottom-4 -left-4 lg:-bottom-6 lg:-left-6 w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center text-white shadow-xl animate-float z-20" 
+      data-aos="zoom-in" 
+      data-aos-delay="700" 
+      style={{ animationDelay: '1s' }}
+    >
+      <Palette className="w-6 h-6 lg:w-8 lg:h-8" />
+    </div>
+    
+    {/* Zap Icon (Middle Right) */}
+    <div 
+      className="absolute top-1/2 -right-6 lg:-right-10 w-12 h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white shadow-xl animate-float z-20 transform -translate-y-1/2" 
+      data-aos="zoom-in" 
+      data-aos-delay="900" 
+      style={{ animationDelay: '2s' }}
+    >
+      <Zap className="w-6 h-6 lg:w-7 lg:h-7" />
+    </div>
+
+  </div>
+</div>
         
         {/* Scroll Indicator */}
         <button
