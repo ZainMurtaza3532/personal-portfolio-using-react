@@ -1,5 +1,14 @@
 import React from 'react';
-import { Github, Linkedin, Twitter, Mail, ArrowUp } from 'lucide-react';
+import { 
+  Github, 
+  Linkedin, 
+  Twitter, 
+  Mail, 
+  ArrowUp, 
+  Phone, 
+  MapPin, 
+  ChevronRight 
+} from 'lucide-react';
 import logo from '/public/images/abc.png'; 
 
 const Footer = () => {
@@ -14,22 +23,26 @@ const Footer = () => {
     { 
       icon: <Github className="w-5 h-5" />, 
       label: 'GitHub', 
-      link: "https://github.com/ZainMurtaza3532"
+      link: "https://github.com/ZainMurtaza3532",
+      hoverColor: "hover:from-gray-700 hover:to-gray-900"
     },
     { 
       icon: <Linkedin className="w-5 h-5" />, 
       label: 'LinkedIn', 
-      link: "https://www.linkedin.com/in/zain-murtaza-ghulam-murtaza-185a67304/"
+      link: "https://www.linkedin.com/in/zain-murtaza-ghulam-murtaza-185a67304/",
+      hoverColor: "hover:from-blue-600 hover:to-blue-800"
     },
     { 
       icon: <Twitter className="w-5 h-5" />, 
       label: 'Twitter', 
-      link: "#"
+      link: "#",
+      hoverColor: "hover:from-blue-400 hover:to-blue-600"
     },
     { 
       icon: <Mail className="w-5 h-5" />, 
       label: 'Email', 
-      link: "#"
+      link: "mailto:zain@example.com",
+      hoverColor: "hover:from-red-500 hover:to-red-700"
     }
   ];
   
@@ -43,40 +56,44 @@ const Footer = () => {
     { name: 'Contact', href: '#contact' },
   ];
   
-  // Split footer links into two columns (4 in first, 3 in second)
+  // Split footer links into two columns
   const firstColumnLinks = footerLinks.slice(0, 4);
   const secondColumnLinks = footerLinks.slice(4);
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 to-black text-white py-16 px-2 sm:px-6 lg:px-8">
+    <footer className="bg-gradient-to-b from-gray-900 to-black text-white pt-20 pb-10 px-4 sm:px-6 lg:px-8 border-t border-gray-800">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          {/* Logo and Description */}
-          <div className="md:col-span-2" data-aos="fade-right" data-aos-duration="1000">
+        
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          
+          {/* Brand & Description (Takes up 2 columns on Large screens) */}
+          <div className="lg:col-span-2" data-aos="fade-right" data-aos-duration="1000">
             <div className="flex items-center mb-6" data-aos="fade-down" data-aos-delay="100">
               <img
                 src={logo}
                 alt="Zain Logo"
-                className="w-16 h-17 object-contain"
+                className="w-14 h-14 object-contain"
               />
-              <span className="text-3xl font-bold text-gradient ml-3">ZAIN</span>
+              <span className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500 ml-3 tracking-wide">
+                ZAIN
+              </span>
             </div>
-            <p className="text-gray-300 mb-8 max-w-md text-lg" data-aos="fade-up" data-aos-delay="200">
-              Passionate web developer creating beautiful, responsive web experiences with modern technologies.
+            
+            <p className="text-gray-400 mb-8 max-w-md text-base leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+              Passionate web developer creating beautiful, responsive web experiences with modern technologies. Building the digital future, one line of code at a time.
             </p>
             
             {/* Social Links */}
-            <div className="flex space-x-5" data-aos="fade-up" data-aos-delay="300">
+            <div className="flex space-x-4" data-aos="fade-up" data-aos-delay="300">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-300 hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white transition-all duration-300 hover:scale-110"
+                  className={`w-12 h-12 bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:shadow-lg bg-gradient-to-r ${social.hoverColor}`}
                   aria-label={social.label}
-                  data-aos="zoom-in"
-                  data-aos-delay={400 + index * 100}
                 >
                   {social.icon}
                 </a>
@@ -84,88 +101,97 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Quick Links - Two Columns */}
-          <div className="md:col-span-1" data-aos="fade-up" data-aos-delay="200">
-            <h3 className="text-xl font-semibold mb-6 text-white">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-6">
-              {/* First Column */}
-              <div>
-                <ul className="space-y-4">
-                  {firstColumnLinks.map((link, index) => (
-                    <li key={index}>
-                      <a 
-                        href={link.href} 
-                        className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center text-lg"
-                        data-aos="fade-right"
-                        data-aos-delay={300 + index * 50}
-                      >
-                        <span className="mr-2 text-purple-400">›</span> {link.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              {/* Second Column */}
-              <div>
-                <ul className="space-y-4">
-                  {secondColumnLinks.map((link, index) => (
-                    <li key={index}>
-                      <a 
-                        href={link.href} 
-                        className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center text-lg"
-                        data-aos="fade-right"
-                        data-aos-delay={500 + index * 50}
-                      >
-                        <span className="mr-2 text-purple-400">›</span> {link.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+          {/* Quick Links */}
+          <div className="lg:col-span-1" data-aos="fade-up" data-aos-delay="400">
+            <h3 className="text-lg font-bold mb-6 text-white uppercase tracking-wider">Quick Links</h3>
+            <nav className="grid grid-cols-2 gap-x-4 gap-y-3">
+              <ul className="space-y-3">
+                {firstColumnLinks.map((link, index) => (
+                  <li key={index}>
+                    <a 
+                      href={link.href} 
+                      className="group flex items-center text-gray-400 hover:text-purple-400 transition-colors duration-300"
+                    >
+                      <ChevronRight className="w-4 h-4 mr-1 text-gray-600 group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-300" />
+                      <span className="text-sm font-medium">{link.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <ul className="space-y-3">
+                {secondColumnLinks.map((link, index) => (
+                  <li key={index}>
+                    <a 
+                      href={link.href} 
+                      className="group flex items-center text-gray-400 hover:text-purple-400 transition-colors duration-300"
+                    >
+                      <ChevronRight className="w-4 h-4 mr-1 text-gray-600 group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-300" />
+                      <span className="text-sm font-medium">{link.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
           
           {/* Contact Info */}
-          <div className="md:col-span-1" data-aos="fade-left" data-aos-delay="400">
-            <h3 className="text-xl font-semibold mb-6 text-white">Get In Touch</h3>
-            <ul className="space-y-5">
-              <li className="flex items-start" data-aos="fade-up" data-aos-delay="500">
-                <Mail className="w-6 h-6 text-purple-400 mt-1 mr-3 flex-shrink-0" />
-                <span className="text-gray-300 text-lg">zain@example.com</span>
+          <div className="lg:col-span-1" data-aos="fade-left" data-aos-delay="500">
+            <h3 className="text-lg font-bold mb-6 text-white uppercase tracking-wider">Get In Touch</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start group">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 mr-4 group-hover:bg-purple-900/50 transition-colors duration-300">
+                  <Mail className="w-4 h-4 text-purple-400" />
+                </div>
+                <div className="flex flex-col pt-2">
+                  <a href="mailto:zain@example.com" className="text-gray-400 text-sm hover:text-white transition-colors">
+                    zain@example.com
+                  </a>
+                </div>
               </li>
-              <li className="flex items-start" data-aos="fade-up" data-aos-delay="600">
-                <svg className="w-6 h-6 text-purple-400 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                <span className="text-gray-300 text-lg">+92 123 4567890</span>
+              
+              <li className="flex items-start group">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 mr-4 group-hover:bg-purple-900/50 transition-colors duration-300">
+                  <Phone className="w-4 h-4 text-purple-400" />
+                </div>
+                <div className="flex flex-col pt-2">
+                  <a href="tel:+921234567890" className="text-gray-400 text-sm hover:text-white transition-colors">
+                    +92 123 4567890
+                  </a>
+                </div>
               </li>
-              <li className="flex items-start" data-aos="fade-up" data-aos-delay="700">
-                <svg className="w-6 h-6 text-purple-400 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span className="text-gray-300 text-lg">Lahore, PK</span>
+              
+              <li className="flex items-start group">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 mr-4 group-hover:bg-purple-900/50 transition-colors duration-300">
+                  <MapPin className="w-4 h-4 text-purple-400" />
+                </div>
+                <div className="flex flex-col pt-2">
+                  <span className="text-gray-400 text-sm">
+                    Lahore, PK
+                  </span>
+                </div>
               </li>
             </ul>
           </div>
+          
         </div>
         
-        {/* Copyright and Back to Top */}
-        <div className="border-t border-gray-800 mt-16 pt-10 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-lg mb-6 md:mb-0" data-aos="fade-up">
-            &copy; {new Date().getFullYear()} Zain. All rights reserved.
+        {/* Footer Bottom / Copyright */}
+        <div className="border-t border-gray-800/80 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-500 text-sm font-medium" data-aos="fade-right">
+            &copy; {new Date().getFullYear()} Zain Murtaza. All rights reserved.
           </p>
+          
           <button
             onClick={scrollToTop}
-            className="flex items-center text-gray-300 hover:text-white transition-colors duration-300 text-lg"
-            data-aos="fade-up"
-            data-aos-delay="200"
+            aria-label="Scroll back to top"
+            className="group flex items-center space-x-2 bg-gray-800/50 hover:bg-gray-700 px-4 py-2 rounded-full text-gray-400 hover:text-white transition-all duration-300 border border-gray-700 hover:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            data-aos="fade-left"
           >
-            <span className="mr-2">Back to Top</span>
-            <ArrowUp className="w-5 h-5" />
+            <span className="text-sm font-medium">Back to Top</span>
+            <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform duration-300" />
           </button>
         </div>
+        
       </div>
     </footer>
   );
