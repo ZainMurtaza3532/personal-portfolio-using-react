@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { ExternalLink, Github, Eye, Filter } from 'lucide-react';
+import React, { useState } from 'react';
+import { ExternalLink, Github, Eye, Sparkles } from 'lucide-react';
 
 const Projects = () => {
-  const [filteredProjects, setFilteredProjects] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
   
   const projects = [
     {
-      title: 'cakery website',
+      title: 'Cakery Website',
       description: 'We bake happiness, one slice at a time. From rich chocolate delights to creamy cheesecakes and custom celebration cakes, every creation is made with love, fresh ingredients, and a touch of artistry. Whether it’s a birthday, wedding, or just a sweet craving, our cakes are designed to make your moments unforgettable.',
       image: '/images/cake.jpg',
       technologies: ['HTML', 'CSS', 'JavaScript'],
@@ -37,7 +36,7 @@ const Projects = () => {
       featured: false
     },
     {
-      title: 'Mediplus website',
+      title: 'Mediplus Website',
       description: 'At Mediplus, we believe health comes first. Our mission is to provide trusted medical care, innovative solutions, and compassionate support for every patient. With advanced technology and a team of dedicated professionals, we are committed to making healthcare accessible, reliable, and caring.',
       image: '/images/preview.jpg',
       technologies: ['HTML', 'CSS', 'JavaScript'],
@@ -75,40 +74,39 @@ const Projects = () => {
     { id: 'react', label: 'React' },
   ];
 
-  useEffect(() => {
-    if (activeFilter === 'all') {
-      setFilteredProjects(projects);
-    } else {
-      setFilteredProjects(projects.filter(project => project.category === activeFilter));
-    }
-  }, [activeFilter, projects]);
+  // Derived state: calculate this on the fly instead of using useEffect
+  const filteredProjects = activeFilter === 'all' 
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-gray-200">
+    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 via-white to-gray-100">
       <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
         <div className="text-center mb-16" data-aos="fade-up">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+          <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
             Featured Projects
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto rounded-full mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Showcasing my latest work and creative solutions
+          <div className="w-24 h-1.5 bg-gradient-to-r from-purple-600 to-pink-500 mx-auto rounded-full mb-6"></div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Showcasing my latest work, technical experiments, and creative solutions.
           </p>
         </div>
         
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up" data-aos-delay="100">
-          {filters.map((filter) => (
+        <div className="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up" data-aos-delay="100">
+          {filters.map((filter, index) => (
             <button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id)}
-              className={`px-6 py-2 rounded-full transition-all duration-300 ${
+              aria-pressed={activeFilter === filter.id}
+              className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
                 activeFilter === filter.id
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md transform scale-105'
+                  : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 hover:border-purple-300 hover:text-purple-600'
               }`}
               data-aos="zoom-in"
-              data-aos-delay={filters.indexOf(filter) * 100}
+              data-aos-delay={index * 100}
             >
               {filter.label}
             </button>
@@ -120,27 +118,37 @@ const Projects = () => {
           {filteredProjects.map((project, index) => (
             <div
               key={project.title}
-              className="card-beautiful group overflow-hidden"
+              className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-500"
               data-aos="fade-up"
-              data-aos-delay={index * 150}
-              data-aos-duration="1000"
+              data-aos-delay={index * 100}
             >
-              <div className="relative overflow-hidden rounded-t-2xl" data-aos="zoom-in" data-aos-delay={index * 150 + 100}>
+              {/* Image Container */}
+              <div className="relative h-56 overflow-hidden">
                 <img
                   src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                  alt={`Screenshot of ${project.title}`}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                
+                {/* Featured Badge */}
+                {project.featured && (
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="flex items-center gap-1 bg-white/95 text-pink-600 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm backdrop-blur-sm">
+                      <Sparkles className="w-3 h-3" />
+                      Featured
+                    </span>
+                  </div>
+                )}
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-gray-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 hover:bg-white transition-colors"
-                    aria-label="View live project"
-                    data-aos="zoom-in"
-                    data-aos-delay={index * 150 + 200}
+                    className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-900 hover:bg-purple-600 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300"
+                    aria-label={`View live demo of ${project.title}`}
                   >
                     <ExternalLink className="w-5 h-5" />
                   </a>
@@ -148,70 +156,78 @@ const Projects = () => {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 hover:bg-white transition-colors"
-                    aria-label="View source code"
-                    data-aos="zoom-in"
-                    data-aos-delay={index * 150 + 300}
+                    className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-900 hover:bg-purple-600 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 delay-75"
+                    aria-label={`View source code of ${project.title}`}
                   >
                     <Github className="w-5 h-5" />
                   </a>
                 </div>
               </div>
-              <div className="p-6" data-aos="fade-up" data-aos-delay={index * 150 + 400}>
-                <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-purple-600 transition-colors">
+
+              {/* Card Content */}
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 mb-4 text-sm">
+                
+                {/* line-clamp-3 ensures uniform card heights even with long descriptions */}
+                <p className="text-gray-600 mb-6 text-sm leading-relaxed line-clamp-3" title={project.description}>
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-purple-100 text-purple-600 text-xs rounded-full"
-                      data-aos="zoom-in"
-                      data-aos-delay={index * 150 + 500 + techIndex * 50}
+                
+                {/* Pushes the footer to the bottom */}
+                <div className="mt-auto">
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1 bg-purple-50 text-purple-700 border border-purple-100 text-xs font-medium rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-1.5 text-sm font-medium text-purple-600 hover:text-purple-800 transition-colors"
                     >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex justify-between items-center">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-1 text-purple-600 hover:text-purple-700 transition-colors text-sm"
-                    data-aos="fade-right"
-                    data-aos-delay={index * 150 + 600}
-                  >
-                    <Eye className="w-4 h-4" />
-                    <span>Live Demo</span>
-                  </a>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-1 text-gray-500 hover:text-gray-700 transition-colors text-sm"
-                    data-aos="fade-left"
-                    data-aos-delay={index * 150 + 700}
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>Source Code</span>
-                  </a>
+                      <Eye className="w-4 h-4" />
+                      <span>Live Demo</span>
+                    </a>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-1.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
+                    >
+                      <Github className="w-4 h-4" />
+                      <span>Source Code</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
         
+        {/* Empty State Fallback */}
+        {filteredProjects.length === 0 && (
+          <div className="text-center py-20 text-gray-500">
+            <p>No projects found in this category.</p>
+          </div>
+        )}
+        
         {/* View More Button */}
-        <div className="text-center mt-12" data-aos="fade-up" data-aos-delay="800">
+        <div className="text-center mt-16" data-aos="fade-up">
           <a
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-modern inline-flex items-center space-x-2"
+            className="inline-flex items-center space-x-2 px-8 py-3.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
           >
             <Github className="w-5 h-5" />
             <span>View More on GitHub</span>
