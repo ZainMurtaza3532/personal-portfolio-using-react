@@ -63,8 +63,7 @@ const HeroSplitLayout = () => {
             </button>
           </div>
         </div>
-
-        {/* Right Side: Circular Profile Image */}
+{/* Right Side: Circular Profile Image */}
 <div className="flex items-center justify-center lg:justify-end mt-10 lg:mt-0" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
   <div className="relative w-full max-w-[450px] aspect-square rounded-full overflow-hidden border-4 border-white/5 bg-[#121C22]">
     {/* Background Glow */}
@@ -72,9 +71,9 @@ const HeroSplitLayout = () => {
     <img
       src="/img.png" // Replace with your image
       alt="Zain Murtaza"
-      // Added `object-top` to align the top of the image with the container
-      // Alternatively, use `object-[center_10%]` or `object-[center_20%]` to fine-tune exactly how far down the head sits.
-      className="w-full h-full object-cover object-top relative z-10"
+      // FIX: scale-[1.15] zooms the image in to remove the empty space at the top.
+      // object-[center_15%] keeps your face perfectly positioned in the upper center.
+      className="w-full h-full object-cover object-[center_15%] scale-[1.15] relative z-10"
     />
   </div>
 </div>
