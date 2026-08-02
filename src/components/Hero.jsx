@@ -70,7 +70,7 @@ const HeroSplitLayout = () => {
             {/* Background Glow */}
             <div className="absolute inset-0 bg-[#00D49F]/10 blur-3xl rounded-full"></div>
             <img
-              src="/images/img.png" // Replace with your image
+              src="/img.png" // Replace with your image
               alt="Zain Murtaza"
               className="w-full h-full object-cover relative z-10"
             />
