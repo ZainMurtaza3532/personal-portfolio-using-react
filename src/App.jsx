@@ -74,7 +74,7 @@ function App() {
           <Hero />
           <About />
           <Skills />
-          <Experience/>  
+          <Education/>  
           <Projects />
           <Contact />
         </main>
