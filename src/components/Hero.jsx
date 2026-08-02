@@ -73,7 +73,7 @@ const HeroSplitLayout = () => {
       alt="Zain Murtaza"
       // FIX: scale-[1.15] zooms the image in to remove the empty space at the top.
       // object-[center_15%] keeps your face perfectly positioned in the upper center.
-      className="w-full h-full object-cover object-[center_15%] scale-[1.15] relative z-10"
+      className="w-full h-full object-cover object-[center_25%] scale-[1.15] relative z-10"
     />
   </div>
 </div>
