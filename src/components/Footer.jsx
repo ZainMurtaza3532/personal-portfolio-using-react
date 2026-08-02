@@ -1,235 +1,35 @@
-import React, { useState } from 'react';
-import { 
-  Github, 
-  Linkedin, 
-  Twitter, 
-  Mail, 
-  ArrowUp, 
-  Phone, 
-  MapPin, 
-  ChevronRight,
-  Send
-} from 'lucide-react';
-import logo from '/public/images/abc.png'; 
-
-// Moved static data outside the component to prevent unnecessary re-creations on render
-const socialLinks = [
-  { 
-    icon: <Github className="w-5 h-5" />, 
-    label: 'GitHub', 
-    link: "https://github.com/ZainMurtaza3532",
-    hoverClass: "hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.4)]"
-  },
-  { 
-    icon: <Linkedin className="w-5 h-5" />, 
-    label: 'LinkedIn', 
-    link: "https://www.linkedin.com/in/zain-murtaza-ghulam-murtaza-185a67304/",
-    hoverClass: "hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] hover:shadow-[0_0_15px_rgba(10,102,194,0.4)]"
-  },
-  { 
-    icon: <Twitter className="w-5 h-5" />, 
-    label: 'Twitter', 
-    link: "#",
-    hoverClass: "hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2] hover:shadow-[0_0_15px_rgba(29,161,242,0.4)]"
-  },
-  { 
-    icon: <Mail className="w-5 h-5" />, 
-    label: 'Email', 
-    link: "mailto:zain@example.com",
-    hoverClass: "hover:bg-[#EA4335] hover:text-white hover:border-[#EA4335] hover:shadow-[0_0_15px_rgba(234,67,53,0.4)]"
-  }
-];
-
-const footerLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Education', href: '#education' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Team', href: '#team' },
-  { name: 'Contact', href: '#contact' },
-];
-
-const firstColumnLinks = footerLinks.slice(0, 4);
-const secondColumnLinks = footerLinks.slice(4);
+import React from 'react';
+import { Github, Linkedin, Twitter } from 'lucide-react';
 
 const Footer = () => {
-  const [email, setEmail] = useState('');
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    // Add your newsletter subscription logic here
-    setEmail('');
-  };
-
   return (
-    <footer className="bg-[#0a0a0a] text-white pt-20 pb-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden selection:bg-[#9300ff]/30">
-      
-      {/* Glowing Top Border */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#9300ff]/50 to-transparent"></div>
-
-      {/* Subtle Background Ambient Glows */}
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-[#9300ff] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.1] pointer-events-none"></div>
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-pink-600 rounded-full mix-blend-screen filter blur-[150px] opacity-[0.05] pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
+    <footer className="bg-[#0B1115] border-t border-white/5 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8 mb-16">
-          
-          {/* Brand, Description & Newsletter */}
-          <div className="md:col-span-2" data-aos="fade-right" data-aos-duration="1000">
-            <a href="#home" className="inline-flex items-center mb-6 group focus:outline-none" data-aos="fade-down" data-aos-delay="100">
-              <img
-                src={logo}
-                alt="Zain Logo"
-                className="w-12 h-12 object-contain group-hover:scale-105 transition-transform duration-300"
-              />
-              <span className="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#9300ff] to-pink-500 ml-3 tracking-wide">
-                ZAIN
-              </span>
-            </a>
-            
-            <p className="text-gray-400 mb-8 max-w-md text-base leading-relaxed font-light" data-aos="fade-up" data-aos-delay="200">
-              Passionate web developer creating beautiful, responsive web experiences with modern technologies. Building the digital future, one line of code at a time.
-            </p>
-            
-            {/* Newsletter Subscription */}
-            <form onSubmit={handleSubscribe} className="relative max-w-md mb-8 group" data-aos="fade-up" data-aos-delay="250">
-              <input 
-                type="email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Subscribe to my newsletter" 
-                required
-                className="w-full bg-white/5 border border-white/10 rounded-full py-3.5 pl-5 pr-14 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#9300ff]/50 focus:ring-1 focus:ring-[#9300ff]/50 transition-all backdrop-blur-sm"
-              />
-              <button 
-                type="submit"
-                aria-label="Subscribe"
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-[#9300ff] hover:bg-[#b545ff] rounded-full flex items-center justify-center text-white transition-all shadow-[0_0_15px_rgba(147,0,255,0.4)] hover:scale-105"
-              >
-                <Send className="w-4 h-4 translate-x-[-1px] translate-y-[1px]" />
-              </button>
-            </form>
-
-            {/* Social Links */}
-            <div className="flex space-x-4" data-aos="fade-up" data-aos-delay="300">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-11 h-11 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl flex items-center justify-center text-gray-400 transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-[#9300ff] ${social.hoverClass}`}
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
+        {/* Branding */}
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-[#00D49F]">
+            <span className="font-mono font-bold text-sm">&lt;/&gt;</span>
           </div>
-          
-          {/* Quick Links */}
-          <div className="lg:col-span-1" data-aos="fade-up" data-aos-delay="400">
-            <h3 className="text-sm font-bold mb-6 text-white uppercase tracking-widest">Quick Links</h3>
-            <nav className="grid grid-cols-2 gap-x-4 gap-y-3">
-              <ul className="space-y-3">
-                {firstColumnLinks.map((link, index) => (
-                  <li key={index}>
-                    <a 
-                      href={link.href} 
-                      className="group flex items-center text-gray-400 hover:text-[#9300ff] transition-colors duration-300 focus:outline-none focus:text-[#9300ff]"
-                    >
-                      <ChevronRight className="w-4 h-4 mr-1.5 text-gray-600 group-hover:text-[#9300ff] group-hover:translate-x-1 transition-all duration-300" />
-                      <span className="text-sm font-medium">{link.name}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <ul className="space-y-3">
-                {secondColumnLinks.map((link, index) => (
-                  <li key={index}>
-                    <a 
-                      href={link.href} 
-                      className="group flex items-center text-gray-400 hover:text-[#9300ff] transition-colors duration-300 focus:outline-none focus:text-[#9300ff]"
-                    >
-                      <ChevronRight className="w-4 h-4 mr-1.5 text-gray-600 group-hover:text-[#9300ff] group-hover:translate-x-1 transition-all duration-300" />
-                      <span className="text-sm font-medium">{link.name}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-          
-          {/* Contact Info */}
-          <div className="lg:col-span-1" data-aos="fade-left" data-aos-delay="500">
-            <h3 className="text-sm font-bold mb-6 text-white uppercase tracking-widest">Get In Touch</h3>
-            <ul className="space-y-5">
-              <li>
-                <a href="mailto:zain@example.com" className="group flex items-center focus:outline-none">
-                  <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 mr-4 group-hover:bg-[#9300ff] group-hover:border-transparent group-hover:shadow-[0_0_15px_rgba(147,0,255,0.4)] transition-all duration-300">
-                    <Mail className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-gray-400 text-sm font-medium group-hover:text-white transition-colors">
-                      zain@example.com
-                    </span>
-                  </div>
-                </a>
-              </li>
-              
-              <li>
-                <a href="tel:+921234567890" className="group flex items-center focus:outline-none">
-                  <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 mr-4 group-hover:bg-[#9300ff] group-hover:border-transparent group-hover:shadow-[0_0_15px_rgba(147,0,255,0.4)] transition-all duration-300">
-                    <Phone className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-gray-400 text-sm font-medium group-hover:text-white transition-colors">
-                      +92 123 4567890
-                    </span>
-                  </div>
-                </a>
-              </li>
-              
-              <li className="flex items-center">
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 mr-4">
-                  <MapPin className="w-4 h-4 text-gray-400" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-gray-400 text-sm font-medium">
-                    Sheikhupura, PK
-                  </span>
-                </div>
-              </li>
-            </ul>
-          </div>
-          
+          <span className="text-lg font-bold text-white tracking-tight">NextDev</span>
         </div>
         
-        {/* Footer Bottom / Copyright */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-gray-500 text-sm font-medium text-center md:text-left" data-aos="fade-right">
-            &copy; {new Date().getFullYear()} Zain Murtaza. All rights reserved.
-          </p>
-          
-          <button
-            onClick={scrollToTop}
-            aria-label="Scroll back to top"
-            className="group flex items-center space-x-2 bg-white/5 hover:bg-[#9300ff] px-5 py-2.5 rounded-full text-gray-400 hover:text-white transition-all duration-300 border border-white/10 hover:border-transparent hover:shadow-[0_0_20px_rgba(147,0,255,0.4)] focus:outline-none hover:-translate-y-1 backdrop-blur-sm"
-            data-aos="fade-left"
-          >
-            <span className="text-sm font-semibold tracking-wide">Back to Top</span>
-            <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform duration-300" />
-          </button>
+        {/* Copyright */}
+        <p className="text-gray-500 text-sm font-medium text-center">
+          &copy; {new Date().getFullYear()} Zain Murtaza. All rights reserved.
+        </p>
+        
+        {/* Socials */}
+        <div className="flex items-center gap-4">
+          <a href="#" className="text-gray-500 hover:text-[#00D49F] transition-colors">
+            <Github className="w-5 h-5" />
+          </a>
+          <a href="#" className="text-gray-500 hover:text-[#00D49F] transition-colors">
+            <Linkedin className="w-5 h-5" />
+          </a>
+          <a href="#" className="text-gray-500 hover:text-[#00D49F] transition-colors">
+            <Twitter className="w-5 h-5" />
+          </a>
         </div>
         
       </div>
