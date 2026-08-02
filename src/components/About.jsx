@@ -10,7 +10,7 @@ const About = () => {
         <div className="relative mx-auto w-full max-w-md lg:max-w-none" data-aos="fade-right" data-aos-duration="1200">
           <div className="relative z-10 rounded-[2rem] overflow-hidden bg-[#121C22] aspect-[4/5] p-4 flex items-center justify-center group">
             <img 
-               src="/images/about-profile.jpg" // Replace with your image
+               src="img.png" // Replace with your image
                alt="Zain Murtaza"
                className="w-full h-full object-cover rounded-2xl grayscale-0 hover:scale-105 transition-transform duration-500"
             />
