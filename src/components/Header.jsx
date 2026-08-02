@@ -1,205 +1,184 @@
-import React, { useState, useEffect, useCallback, useRef, useContext } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react'; // Added Moon icon
+import React, { useState } from 'react';
+import { 
+  Github, 
+  Linkedin, 
+  Twitter, 
+  Mail, 
+  Code, 
+  Grid,
+  Menu,
+  X
+} from 'lucide-react';
 import logo from '/public/images/abc.png'; 
-import { ThemeContext } from '../App'; // Import the context from App.js
 
-const Logo = () => {
-  return (
-    <a href="#home" className="flex items-center group focus:outline-none" data-aos="fade-right">
-      <img
-        src={logo}
-        alt="Zain Logo"
-        className="w-10 h-10 md:w-12 md:h-12 object-contain group-hover:scale-105 transition-transform duration-300"
-      />
-      {/* Added dynamic text color for light/dark mode */}
-      <span className="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white ml-2 tracking-tight hidden lg:block transition-colors">
-        ZAIN
-      </span>
-    </a>
-  );
-};
-
+// ==========================================
+// HEADER COMPONENT
+// ==========================================
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-  const rafRef = useRef(null);
-  
-  // Consume the theme context
-  const { theme, setTheme } = useContext(ThemeContext);
-  
-  const navItems = [
-    { name: 'Home', href: '#home', id: 'home' },
-    { name: 'About', href: '#about', id: 'about' },
-    { name: 'Skills', href: '#skills', id: 'skills' },
-    { name: 'Education', href: '#education', id: 'education' },
-    { name: 'Projects', href: '#projects', id: 'projects' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
-  ];
-
-  const handleScroll = useCallback(() => {
-    if (rafRef.current) return;
-    rafRef.current = requestAnimationFrame(() => {
-      setIsScrolled(window.scrollY > 20);
-      
-      const sections = ['home', 'about', 'skills', 'education', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 150; 
-      
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetBottom = offsetTop + element.offsetHeight;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-      rafRef.current = null;
-    });
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-    };
-  }, [handleScroll]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024 && isMenuOpen) {
-        setIsMenuOpen(false);
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isMenuOpen) {
-        setIsMenuOpen(false);
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isMenuOpen]);
-
-  const scrollToSection = useCallback((e, href, id) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(id);
-    }
-    setIsMenuOpen(false);
-  }, []);
-
-  // Theme Toggle Handler
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
 
   return (
-    <header className="fixed top-4 md:top-6 left-0 right-0 z-50 flex justify-center px-4 w-full" data-aos="fade-down" data-aos-duration="800">
-      
-      {/* Floating Pill Container */}
-      <div className={`relative flex items-center justify-between lg:justify-center p-1.5 md:p-2 rounded-full transition-all duration-300 w-full max-w-7xl lg:w-auto ${
-        isScrolled || isMenuOpen
-          ? 'bg-white/80 dark:bg-[#2a2a2a]/85 backdrop-blur-md shadow-2xl border border-gray-200 dark:border-white/10' 
-          : 'bg-white/50 dark:bg-[#2a2a2a]/60 backdrop-blur-sm border border-transparent'
-      }`}>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-dashed border-gray-300 w-full">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
-        {/* Mobile Logo */}
-        <div className="lg:hidden pl-2">
-          <Logo />
+        {/* Left: Logo / Name */}
+        <div className="flex items-center gap-3">
+          <span className="px-4 py-2 bg-gray-100 text-black font-black text-sm tracking-widest uppercase border border-gray-200">
+            Zain Murtaza
+          </span>
         </div>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={(e) => scrollToSection(e, item.href, item.id)}
-              aria-current={activeSection === item.id ? 'page' : undefined}
-              className={`px-6 py-2.5 rounded-full text-[15px] font-medium transition-all duration-300 ${
-                activeSection === item.id
-                  ? 'bg-[#9300ff] text-white shadow-md' 
-                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5'
-              }`}
-            >
-              {item.name}
-            </a>
-          ))}
+        {/* Center: Social / Tech Icons (Pill) */}
+        <div className="hidden md:flex items-center gap-1 bg-white border border-gray-200 p-1 shadow-sm rounded-md">
+          <a href="#" className="p-2 text-gray-500 hover:text-black hover:bg-gray-100 transition-colors rounded-sm">
+            <Github className="w-4 h-4" />
+          </a>
+          <a href="#" className="p-2 text-gray-500 hover:text-black hover:bg-gray-100 transition-colors rounded-sm">
+            <Linkedin className="w-4 h-4" />
+          </a>
+          <a href="#" className="p-2 text-gray-500 hover:text-black hover:bg-gray-100 transition-colors rounded-sm">
+            <Twitter className="w-4 h-4" />
+          </a>
+          <a href="#" className="p-2 text-gray-500 hover:text-black hover:bg-gray-100 transition-colors rounded-sm">
+            <Code className="w-4 h-4" />
+          </a>
+        </div>
 
-          {/* Divider line */}
-          <div className="w-[1px] h-8 bg-gray-300 dark:bg-gray-500/40 mx-2"></div>
-          
-          {/* Desktop Theme Toggle */}
-          <button 
-            onClick={toggleTheme}
-            className="w-10 h-10 rounded-full bg-gray-100 dark:bg-white flex items-center justify-center text-[#9300ff] hover:scale-105 transition-transform border border-gray-200 dark:border-transparent"
-            aria-label="Toggle Theme"
-          >
-            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+        {/* Right: Actions */}
+        <div className="flex items-center gap-4">
+          <button className="hidden md:flex p-2 bg-gray-100 hover:bg-gray-200 text-black rounded-sm border border-gray-200 transition-colors">
+            <Grid className="w-4 h-4" />
           </button>
-        </nav>
-
-        {/* Mobile Menu Actions */}
-        <div className="flex items-center gap-2 lg:hidden pr-1">
-          {/* Mobile Theme Toggle */}
-          <button 
-            onClick={toggleTheme}
-            className="w-9 h-9 rounded-full bg-gray-100 dark:bg-white flex items-center justify-center text-[#9300ff] border border-gray-200 dark:border-transparent"
-            aria-label="Toggle Theme"
+          <a 
+            href="#download" 
+            className="hidden md:inline-block px-6 py-2.5 bg-black text-white text-xs font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors shadow-lg"
           >
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
+            Download CV
+          </a>
           
-          <button
-            className="p-2 rounded-full text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-white/10 transition-colors focus:outline-none"
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="md:hidden p-2 text-black"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-expanded={isMenuOpen}
-            aria-label="Toggle navigation menu"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Nav Dropdown */}
-      <div 
-        className={`lg:hidden absolute top-[110%] left-4 right-4 rounded-3xl bg-white/95 dark:bg-[#2a2a2a]/95 backdrop-blur-xl shadow-2xl border border-gray-200 dark:border-white/10 transition-all duration-300 overflow-hidden ${
-          isMenuOpen ? 'opacity-100 scale-y-100 translate-y-0 visible' : 'opacity-0 scale-y-95 -translate-y-4 invisible'
-        } origin-top`}
-      >
-        <nav className="p-4 flex flex-col space-y-1">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={(e) => scrollToSection(e, item.href, item.id)}
-              aria-current={activeSection === item.id ? 'page' : undefined}
-              className={`block w-full px-5 py-3.5 rounded-2xl transition-colors text-base font-medium ${
-                activeSection === item.id
-                  ? 'bg-[#9300ff] text-white shadow-sm'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 dark:hover:text-white'
-              }`}
-            >
-              {item.name}
-            </a>
-          ))}
-        </nav>
-      </div>
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-gray-200 p-4 shadow-xl flex flex-col gap-4">
+          <div className="flex justify-center gap-4 border-b border-gray-100 pb-4">
+            <Github className="w-5 h-5 text-gray-600" />
+            <Linkedin className="w-5 h-5 text-gray-600" />
+            <Twitter className="w-5 h-5 text-gray-600" />
+            <Mail className="w-5 h-5 text-gray-600" />
+          </div>
+          <button className="w-full py-3 bg-black text-white text-sm font-bold uppercase tracking-wider">
+            Download CV
+          </button>
+        </div>
+      )}
     </header>
   );
 };
 
-export default Header;
+// ==========================================
+// HERO COMPONENT
+// ==========================================
+const HeroModern = () => {
+  return (
+    <section id="home" className="relative min-h-screen w-full bg-[#fcfcfc] text-black overflow-hidden flex flex-col items-center pt-24 font-sans selection:bg-black selection:text-white">
+      
+      {/* Background Giant Text */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center z-0 pointer-events-none select-none">
+        <h1 className="text-[12vw] font-black text-gray-100/60 leading-none tracking-tighter">
+          WEB DEVELOPER
+        </h1>
+      </div>
+
+      {/* Thin Background Connecting Lines (Simulated SVG wireframe) */}
+      <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-200 z-0"></div>
+      <div className="absolute top-1/2 left-[20%] w-[1px] h-64 bg-gray-200 z-0"></div>
+      <div className="absolute top-1/2 right-[20%] w-[1px] h-64 bg-gray-200 z-0"></div>
+
+      {/* Main Content Grid */}
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between flex-grow mt-10 lg:mt-0">
+        
+        {/* Left Column: Intro Card */}
+        <div className="w-full lg:w-1/4 flex justify-center lg:justify-start mb-10 lg:mb-0">
+          <div className="bg-white p-8 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 w-full max-w-sm relative">
+            <h2 className="text-sm font-black uppercase tracking-wide leading-relaxed mb-6 text-gray-900">
+              Hello! I'm Zain<br />
+              Software Engineer<br />
+              Building UI/UX &<br />
+              Scalable Web Apps<br />
+              From Pakistan.
+            </h2>
+            <ul className="space-y-3 text-xs font-medium text-gray-500">
+              <li className="flex items-center gap-2">
+                <span className="text-gray-300">✛</span> Web Development
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-gray-300">✛</span> React / Tailwind
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-gray-300">✛</span> Frontend Architecture
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-gray-300">✛</span> UI/UX Design
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Center Column: Subject Image */}
+        <div className="w-full lg:w-2/4 flex justify-center items-end relative h-[500px] lg:h-[700px] z-20">
+          {/* Replace src with your actual cutout image */}
+          <img 
+            src="/img.png" 
+            alt="Zain Murtaza" 
+            className="absolute bottom-0 w-full max-w-[500px] object-contain drop-shadow-2xl"
+          />
+        </div>
+
+        {/* Right Column: Stat Cards */}
+        <div className="w-full lg:w-1/4 flex flex-col items-center lg:items-end gap-6 mt-10 lg:mt-0 relative">
+          
+          {/* Stat Card 1 */}
+          <div className="bg-white p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 w-56 relative -left-6 z-20">
+            <h3 className="text-3xl font-black mb-1">3+</h3>
+            <p className="text-xs text-gray-500 font-medium">Years in Frontend &<br/> Web Development</p>
+          </div>
+
+          {/* Stat Card 2 (Inverted) */}
+          <div className="bg-black text-white p-6 rounded-xl shadow-xl w-56 relative z-30">
+            <h3 className="text-3xl font-black mb-1">15+</h3>
+            <p className="text-xs text-gray-300 font-medium">Projects Launched</p>
+          </div>
+
+          {/* Stat Card 3 */}
+          <div className="bg-white p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 w-56 relative -left-8 z-10">
+            <h3 className="text-3xl font-black mb-1">100%</h3>
+            <p className="text-xs text-gray-500 font-medium">Client Satisfaction</p>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Bottom Section: Quote & Action */}
+      <div className="relative z-30 w-full pb-12 flex flex-col items-center mt-auto">
+        <h3 className="text-center text-lg md:text-xl font-bold tracking-[0.2em] text-gray-400 uppercase text-transparent bg-clip-text bg-gradient-to-b from-gray-300 to-gray-500 style-outline">
+          Code with purpose, build with precision.
+        </h3>
+        <button className="mt-6 px-8 py-3 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-all hover:shadow-xl hover:-translate-y-1 rounded-sm">
+          View Projects
+        </button>
+      </div>
+
+    </section>
+  );
+};
+
+export { Header, HeroModern as HeroSplitLayout };
