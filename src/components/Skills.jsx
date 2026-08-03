@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { FaReact, FaNodeJs, FaDatabase, FaGithub } from 'react-icons/fa';
-import { SiTypescript, SiTailwindcss, SiNextdotjs } from 'react-icons/si';
+import { FaReact, FaNodeJs, FaDatabase, FaGithub, FaPostman } from 'react-icons/fa';
+import { SiTypescript, SiTailwindcss, SiNextdotjs, SiVisualstudio } from 'react-icons/si';
 
 const Skills = () => {
   const [animated, setAnimated] = useState(false);
