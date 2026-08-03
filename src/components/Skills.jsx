@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { FaReact, FaNodeJs, FaDatabase, FaGithub } from 'react-icons/fa';
+import { FaNodeJs, FaDatabase, FaGithub } from 'react-icons/fa';
 import { SiTypescript, SiTailwindcss, SiNextdotjs, SiVisualstudio, SiExpress, SiPostman } from 'react-icons/si';
 
 const Skills = () => {
@@ -33,7 +33,7 @@ const Skills = () => {
       title: 'Backend',
       skills: [
         { name: 'Node.js', level: 85, icon: <FaNodeJs className="w-5 h-5 text-white" /> },
-        { name: 'Express.Js', level: 80, icon: <SiExpress className="w-5 h-5 text-white" /> }, // Fixed Express icon
+        { name: 'Express.Js', level: 80, icon: <SiExpress className="w-5 h-5 text-white" /> },
         { name: 'SQL & NoSQL', level: 80, icon: <FaDatabase className="w-4 h-4 text-white" /> },
       ],
     },
@@ -42,7 +42,7 @@ const Skills = () => {
       skills: [
         { name: 'Git & GitHub', level: 90, icon: <FaGithub className="w-5 h-5 text-white" /> },
         { name: 'Visual Studio', level: 90, icon: <SiVisualstudio className="w-5 h-5 text-white" /> },
-        { name: 'Postman', level: 90, icon: <SiPostman className="w-5 h-5 text-white" /> }, // Fixed Postman icon
+        { name: 'Postman', level: 90, icon: <SiPostman className="w-5 h-5 text-white" /> },
       ],
     },
   ];
