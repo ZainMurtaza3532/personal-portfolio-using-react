@@ -33,7 +33,7 @@ const Skills = () => {
       title: 'Backend',
       skills: [
         { name: 'Node.js', level: 85, icon: <FaNodeJs className="w-5 h-5 text-white" /> },
-        { name: 'Express Js', level: 80, icon: <FaExpressJs className="w-5 h-5 text-white" /> },
+        { name: 'Express.Js', level: 80, icon: <FaExpress className="w-5 h-5 text-white" /> },
         { name: 'SQL & NoSQL', level: 80, icon: <FaDatabase className="w-4 h-4 text-white" /> },
       ],
     },
