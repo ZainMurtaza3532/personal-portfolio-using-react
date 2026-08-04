@@ -1,4 +1,36 @@
-{/* Left Side: Typography */}
+import React, { useState, useEffect } from 'react';
+import { ArrowRight } from 'lucide-react';
+
+const Hero = () => {
+  const [headerHeight, setHeaderHeight] = useState(100);
+
+  useEffect(() => {
+    const header = document.querySelector('header');
+    if (!header) return;
+    const updateHeight = () => setHeaderHeight(header.offsetHeight + 40); 
+    updateHeight();
+    const resizeObserver = new ResizeObserver(updateHeight);
+    resizeObserver.observe(header);
+    return () => resizeObserver.disconnect();
+  }, []);
+
+  const handleScrollTo = (e, targetId) => {
+    e.preventDefault();
+    const targetSection = document.querySelector(targetId);
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <section 
+      id="home" 
+      className="min-h-screen w-full bg-[#0B1115] flex flex-col justify-center overflow-hidden relative"
+      style={{ paddingTop: `${headerHeight}px` }}
+    >
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center my-auto py-12 relative z-10">
+        
+        {/* Left Side: Typography */}
         <div className="flex flex-col justify-center space-y-8">
           
           <div data-aos="fade-down" data-aos-delay="200" className="inline-flex items-center px-4 py-2 rounded-full border border-[#00D49F]/30 bg-[#00D49F]/10 text-[#00D49F] text-sm font-medium w-fit">
@@ -34,9 +66,7 @@
 
         {/* Right Side: Circular Profile Image */}
         <div className="flex items-center justify-center lg:justify-end mt-10 lg:mt-0" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="400">
-          {/* Added animate-float for a continuous floating effect */}
           <div className="relative w-full max-w-[450px] aspect-square rounded-full overflow-hidden border-4 border-white/5 bg-[#121C22] animate-float shadow-[0_0_50px_rgba(0,212,159,0.15)]">
-            {/* Background Glow */}
             <div className="absolute inset-0 bg-[#00D49F]/20 blur-3xl rounded-full"></div>
             <img
               src="/img.png"
@@ -45,3 +75,10 @@
             />
           </div>
         </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
