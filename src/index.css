@@ -1,30 +1,20 @@
-/* index.css - Premium Modern UI */
+/* index.css - Premium Modern UI (NextDev Theme) */
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
   :root {
-    /* Light Mode Variables */
-    --bg-color: #f8fafc;
-    --text-color: #0f172a;
-    --selection-bg: rgba(147, 0, 255, 0.2);
-    --selection-text: #9300ff;
-    --scrollbar-track: #f1f5f9;
-    --scrollbar-thumb: #cbd5e1;
-  }
-
-  .dark {
-    /* Dark Mode Variables matching our React components */
-    --bg-color: #0a0a0a;
+    --bg-color: #0B1115;
+    --surface-color: #121C22;
+    --accent-color: #00D49F;
     --text-color: #f8fafc;
-    --selection-bg: rgba(147, 0, 255, 0.4);
-    --selection-text: #ffffff;
-    --scrollbar-track: #0a0a0a;
-    --scrollbar-thumb: #2a2a2a;
+    --scrollbar-track: #0B1115;
+    --scrollbar-thumb: #1A262E;
   }
 
   html {
     scroll-behavior: smooth;
+    background-color: var(--bg-color);
   }
   
   body {
@@ -34,7 +24,6 @@
     background-color: var(--bg-color);
     color: var(--text-color);
     overflow-x: hidden;
-    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
   }
   
   * {
@@ -45,16 +34,15 @@
 
   /* Premium Selection Color */
   ::selection {
-    background: var(--selection-bg);
-    color: var(--selection-text);
-    text-shadow: 0 0 8px rgba(147, 0, 255, 0.4);
+    background: rgba(0, 212, 159, 0.2);
+    color: #00D49F;
   }
 }
 
 /* Minimal Premium Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-track {
   background: var(--scrollbar-track);
@@ -62,57 +50,39 @@
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
   border-radius: 10px;
+  border: 2px solid var(--scrollbar-track); 
   transition: background 0.3s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9300ff; /* Neon purple on hover */
+  background: var(--accent-color);
 }
 
 @layer utilities {
-  /* Gradient text */
-  .gradient-text {
-    background: linear-gradient(135deg, #9300ff 0%, #ec4899 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Page Load Fade-In Animation */
+  .animate-page-enter {
+    animation: pageEnter 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  /* Glow effect */
-  .glow-purple {
-    box-shadow: 0 0 25px rgba(147, 0, 255, 0.4);
+  @keyframes pageEnter {
+    0% { 
+      opacity: 0; 
+      transform: translateY(20px); 
+      filter: blur(5px);
+    }
+    100% { 
+      opacity: 1; 
+      transform: translateY(0);
+      filter: blur(0px);
+    }
   }
 
-  .glow-pink {
-    box-shadow: 0 0 25px rgba(236, 72, 153, 0.4);
-  }
-
-  /* Enhanced animations used in backgrounds */
-  @keyframes blob {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -50px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
-    100% { transform: translate(0px, 0px) scale(1); }
-  }
-
-  .animate-blob {
-    animation: blob 7s infinite cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
-
-  /* Floating animation */
+  /* Subtle floating animation used for images/cards if needed */
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
+    50% { transform: translateY(-10px); }
   }
   
   .animate-float {
-    animation: float 5s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
   }
 }
