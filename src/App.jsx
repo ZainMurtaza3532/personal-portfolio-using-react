@@ -1,21 +1,23 @@
 import React, { useState, useEffect, createContext } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+// Component Imports
 import Header from './components/Header';
-import Hero from './components/Hero'; // Assumed from your HeroSplitLayout
+import Hero from './components/Hero'; 
 import About from './components/About';
 import Skills from './components/Skills';
 import Experience from './components/Experience'; 
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Preloader from './components/Preloader'; // Import the new Preloader
+import Preloader from './components/Preloader'; 
 
 export const ThemeContext = createContext();
 
 function App() {
   const [theme, setTheme] = useState('dark');
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -62,7 +64,7 @@ function App() {
     
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
-  }, [isLoading]); // Dependency on isLoading
+  }, [isLoading]); 
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
