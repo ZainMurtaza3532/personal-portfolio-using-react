@@ -1,9 +1,10 @@
-/* index.css - Premium Modern UI (NextDev Theme) */
+/* src/index.css - Premium Modern UI (NextDev Theme) */
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
   :root {
+    /* Premium Dark Theme Variables */
     --bg-color: #0B1115;
     --surface-color: #121C22;
     --accent-color: #00D49F;
@@ -32,10 +33,11 @@
     box-sizing: border-box;
   }
 
-  /* Premium Selection Color */
+  /* Premium Selection Color (Teal Accent) */
   ::selection {
     background: rgba(0, 212, 159, 0.2);
-    color: #00D49F;
+    color: var(--accent-color);
+    text-shadow: 0 0 8px rgba(0, 212, 159, 0.3);
   }
 }
 
@@ -50,7 +52,7 @@
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
   border-radius: 10px;
-  border: 2px solid var(--scrollbar-track); 
+  border: 2px solid var(--scrollbar-track); /* Creates a padding effect around the thumb */
   transition: background 0.3s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -67,7 +69,7 @@
     0% { 
       opacity: 0; 
       transform: translateY(20px); 
-      filter: blur(5px);
+      filter: blur(8px);
     }
     100% { 
       opacity: 1; 
@@ -76,7 +78,7 @@
     }
   }
 
-  /* Subtle floating animation used for images/cards if needed */
+  /* Subtle floating animation used for images or cards if needed */
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
@@ -84,5 +86,14 @@
   
   .animate-float {
     animation: float 6s ease-in-out infinite;
+  }
+
+  /* Glow effects matching the new brand colors */
+  .glow-teal {
+    box-shadow: 0 0 25px rgba(0, 212, 159, 0.2);
+  }
+  
+  .glow-teal-strong {
+    box-shadow: 0 0 40px rgba(0, 212, 159, 0.4);
   }
 }
