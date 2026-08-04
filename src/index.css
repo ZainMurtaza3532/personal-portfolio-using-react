@@ -1,8 +1,64 @@
-@layer utilities {
-  /* Existing styles... */
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-  /* --- NEW ANIMATIONS --- */
-  
+@layer base {
+  :root {
+    /* Premium Dark Theme Variables */
+    --bg-color: #0B1115;
+    --surface-color: #121C22;
+    --accent-color: #00D49F;
+    --text-color: #f8fafc;
+    --scrollbar-track: #0B1115;
+    --scrollbar-thumb: #1A262E;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-color);
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Premium Selection Color (Teal Accent) */
+  ::selection {
+    background: rgba(0, 212, 159, 0.2);
+    color: var(--accent-color);
+    text-shadow: 0 0 8px rgba(0, 212, 159, 0.3);
+  }
+}
+
+/* Minimal Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+  border: 2px solid var(--scrollbar-track); 
+  transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+@layer utilities {
   /* Smooth continuous floating */
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
