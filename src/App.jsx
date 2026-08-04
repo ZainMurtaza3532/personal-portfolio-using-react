@@ -1,56 +1,57 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
-// Component Imports
 import Header from './components/Header';
-import Hero from './components/Hero'; // Make sure your file is named Hero.jsx (or HeroSplitLayout.jsx if you didn't rename it)
+import Hero from './components/Hero'; // Assumed from your HeroSplitLayout
 import About from './components/About';
 import Skills from './components/Skills';
 import Experience from './components/Experience'; 
 import Projects from './components/Projects';
-import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Preloader from './components/Preloader'; // Import the new Preloader
 
-// Sleek Loading Screen Component
-const Preloader = () => {
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0B1115]">
-      <div className="relative flex items-center justify-center">
-        {/* Outer spinning ring */}
-        <div className="absolute inset-0 w-24 h-24 border-t-2 border-b-2 border-[#00D49F] rounded-full animate-spin"></div>
-        
-        {/* Inner pulsing logo */}
-        <div className="w-16 h-16 bg-[#121C22] border border-white/5 rounded-full flex items-center justify-center text-[#00D49F] animate-pulse">
-          <span className="font-mono font-bold text-xl">&lt;/&gt;</span>
-        </div>
-      </div>
-    </div>
-  );
-};
+export const ThemeContext = createContext();
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [theme, setTheme] = useState('dark');
+  const [isLoading, setIsLoading] = useState(true); // Loading state
 
   useEffect(() => {
-    // Initialize AOS animations for scrolling
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: 'ease-out-cubic',
-      offset: 50,
-    });
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }, []);
 
-    // Simulate a loading sequence (2 seconds)
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
-    // Smooth scroll handler for anchor links
+  useEffect(() => {
+    // ONLY initialize AOS after loading is complete so animations are visible
+    if (!isLoading) {
+      AOS.init({
+        duration: 1000,
+        once: true,
+        easing: 'ease-out-cubic',
+        offset: 50,
+      });
+      AOS.refresh();
+    }
+
     const handleClick = (e) => {
       const target = e.target.closest('a');
-      if (target && target.hash && target.hash.startsWith('#')) {
+      if (target && target.hash) {
         e.preventDefault();
         const element = document.querySelector(target.hash);
         if (element) {
@@ -60,34 +61,28 @@ function App() {
     };
     
     document.addEventListener('click', handleClick);
-    
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener('click', handleClick);
-    };
-  }, []);
+    return () => document.removeEventListener('click', handleClick);
+  }, [isLoading]); // Dependency on isLoading
 
   return (
-    <div className="min-h-screen bg-[#0B1115] text-white selection:bg-[#00D49F]/20 selection:text-[#00D49F] overflow-hidden">
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        /* Page Load Fade-in Animation wrapper */
-        <div className="animate-page-enter">
-          <Header />
-          <main>
-            <Hero />
-            <About />
-            <Projects />
-            <Experience />  
-            <Skills />
-            <Testimonials />
-            <Contact />
-          </main>
-          <Footer />
-        </div>
-      )}
-    </div>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {/* Show Preloader */}
+      {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+      
+      {/* Main Content - Fades in smoothly after load */}
+      <div className={`min-h-screen bg-[#0B1115] transition-opacity duration-700 ease-in-out ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+        <Header />
+        <main>
+          <Hero />
+          <About />
+          <Skills />
+          <Experience />  
+          <Projects />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
