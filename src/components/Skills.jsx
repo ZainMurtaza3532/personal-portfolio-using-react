@@ -1,6 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FaNodeJs, FaDatabase, FaGithub } from 'react-icons/fa';
-import { SiTypescript, SiTailwindcss, SiNextdotjs } from 'react-icons/si';
+import { 
+  SiTypescript, 
+  SiTailwindcss, 
+  SiNextdotjs, 
+  SiExpress, 
+  SiPrisma, 
+  SiDocker, 
+  SiPostman, 
+  SiVercel 
+} from 'react-icons/si';
 
 const Skills = () => {
   const [animated, setAnimated] = useState(false);
@@ -33,13 +42,18 @@ const Skills = () => {
       title: 'Backend',
       skills: [
         { name: 'Node.js', level: 85, icon: <FaNodeJs className="w-5 h-5 text-white" /> },
+        { name: 'Express.js', level: 80, icon: <SiExpress className="w-5 h-5 text-white" /> },
         { name: 'SQL & NoSQL', level: 80, icon: <FaDatabase className="w-4 h-4 text-white" /> },
+        { name: 'Prisma ORM', level: 75, icon: <SiPrisma className="w-4 h-4 text-white" /> },
       ],
     },
     {
-      title: 'Tools',
+      title: 'Tools & Others',
       skills: [
         { name: 'Git & GitHub', level: 90, icon: <FaGithub className="w-5 h-5 text-white" /> },
+        { name: 'Postman', level: 85, icon: <SiPostman className="w-4 h-4 text-white" /> },
+        { name: 'Docker', level: 65, icon: <SiDocker className="w-5 h-5 text-white" /> },
+        { name: 'Vercel', level: 88, icon: <SiVercel className="w-4 h-4 text-white" /> },
       ],
     },
   ];
