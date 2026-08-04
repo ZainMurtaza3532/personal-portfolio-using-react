@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+// Component Imports
 import Header from './components/Header';
-import Hero from './components/Hero';
+import Hero from './components/Hero'; // Make sure your file is named Hero.jsx (or HeroSplitLayout.jsx if you didn't rename it)
 import About from './components/About';
 import Skills from './components/Skills';
 import Experience from './components/Experience'; 
 import Projects from './components/Projects';
+import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -40,10 +42,10 @@ function App() {
       offset: 50,
     });
 
-    // Simulate a loading sequence (adjust the time as needed)
+    // Simulate a loading sequence (2 seconds)
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // 2 seconds
+    }, 2000);
 
     // Smooth scroll handler for anchor links
     const handleClick = (e) => {
@@ -70,15 +72,16 @@ function App() {
       {isLoading ? (
         <Preloader />
       ) : (
-        /* Page Load Fade-in Animation */
+        /* Page Load Fade-in Animation wrapper */
         <div className="animate-page-enter">
           <Header />
           <main>
             <Hero />
             <About />
-            <Skills />
-            <Experience />  
             <Projects />
+            <Experience />  
+            <Skills />
+            <Testimonials />
             <Contact />
           </main>
           <Footer />
