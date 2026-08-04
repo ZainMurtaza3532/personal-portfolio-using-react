@@ -4,9 +4,7 @@ import {
   SiTypescript, 
   SiTailwindcss, 
   SiNextdotjs, 
-  SiExpress, 
-  SiPrisma, 
-  SiDocker, 
+  SiExpress,   
   SiPostman, 
   SiVercel 
 } from 'react-icons/si';
@@ -44,7 +42,6 @@ const Skills = () => {
         { name: 'Node.js', level: 85, icon: <FaNodeJs className="w-5 h-5 text-white" /> },
         { name: 'Express.js', level: 80, icon: <SiExpress className="w-5 h-5 text-white" /> },
         { name: 'SQL & NoSQL', level: 80, icon: <FaDatabase className="w-4 h-4 text-white" /> },
-        { name: 'Prisma ORM', level: 75, icon: <SiPrisma className="w-4 h-4 text-white" /> },
       ],
     },
     {
@@ -52,7 +49,6 @@ const Skills = () => {
       skills: [
         { name: 'Git & GitHub', level: 90, icon: <FaGithub className="w-5 h-5 text-white" /> },
         { name: 'Postman', level: 85, icon: <SiPostman className="w-4 h-4 text-white" /> },
-        { name: 'Docker', level: 65, icon: <SiDocker className="w-5 h-5 text-white" /> },
         { name: 'Vercel', level: 88, icon: <SiVercel className="w-4 h-4 text-white" /> },
       ],
     },
