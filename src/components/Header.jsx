@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Menu, X, Download } from 'lucide-react';
-import logo from '/public/images/abc.png'; 
 
 const Logo = () => {
   return (
@@ -22,7 +21,7 @@ const Header = () => {
   const rafRef = useRef(null);
   
   const navItems = [
-    { name: 'Home', href: '#home', id: 'home' },
+    { name: 'Home', href: '#root', id: 'home' }, // Fixed href to root for top of page
     { name: 'About', href: '#about', id: 'about' },
     { name: 'Experience', href: '#experience', id: 'experience' },
     { name: 'Projects', href: '#projects', id: 'projects' },
@@ -34,23 +33,23 @@ const Header = () => {
     rafRef.current = requestAnimationFrame(() => {
       setIsScrolled(window.scrollY > 20);
       
-      const sections = ['home', 'about', 'projects', 'experience', 'testimonials', 'contact'];
       const scrollPosition = window.scrollY + 150; 
       
-      for (const section of sections) {
-        const element = document.getElementById(section);
+      // Dynamically check only the sections that exist in navItems
+      for (const item of navItems) {
+        const element = document.getElementById(item.id);
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetBottom = offsetTop + element.offsetHeight;
           if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-            setActiveSection(section);
+            setActiveSection(item.id);
             break;
           }
         }
       }
       rafRef.current = null;
     });
-  }, []);
+  }, [navItems]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -63,17 +62,22 @@ const Header = () => {
 
   const scrollToSection = useCallback((e, href, id) => {
     e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(id);
+    // Special case for home to scroll to absolute top
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setActiveSection('home');
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setActiveSection(id);
+      }
     }
     setIsMenuOpen(false);
   }, []);
 
   return (
     <header className="fixed top-4 md:top-6 left-0 right-0 z-50 flex justify-center px-4 w-full" data-aos="fade-down" data-aos-duration="800">
-      
       <div className={`relative flex items-center justify-between p-2 rounded-full transition-all duration-300 w-full max-w-7xl ${
         isScrolled || isMenuOpen
           ? 'bg-[#121C22]/90 backdrop-blur-md shadow-2xl border border-white/5' 
@@ -107,10 +111,12 @@ const Header = () => {
         <div className="hidden lg:flex pr-2">
            <a 
              href="/cv.pdf" 
+             target="_blank"
+             rel="noopener noreferrer"
              className="flex items-center gap-2 px-6 py-2.5 bg-[#00D49F] text-[#0B1115] hover:bg-[#00F0B5] rounded-full text-sm font-bold transition-colors duration-300"
            >
              <Download className="w-4 h-4" />
-             download CV
+             Download CV
            </a>
         </div>
 
@@ -119,6 +125,7 @@ const Header = () => {
           <button
             className="p-2 rounded-full text-white hover:bg-white/10 transition-colors focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -148,6 +155,8 @@ const Header = () => {
           ))}
           <a 
             href="/cv.pdf" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full mt-4 px-5 py-3.5 bg-[#00D49F] text-[#0B1115] font-bold rounded-xl"
           >
             <Download className="w-5 h-5" />
