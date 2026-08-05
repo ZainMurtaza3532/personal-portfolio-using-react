@@ -9,6 +9,33 @@ import {
   SiVercel 
 } from 'react-icons/si';
 
+const categories = [
+  {
+    title: 'Frontend',
+    skills: [
+      { name: 'React / Next.js', level: 90, icon: SiNextdotjs },
+      { name: 'TypeScript', level: 85, icon: SiTypescript },
+      { name: 'Tailwind CSS', level: 95, icon: SiTailwindcss },
+    ],
+  },
+  {
+    title: 'Backend',
+    skills: [
+      { name: 'Node.js', level: 85, icon: FaNodeJs },
+      { name: 'Express.js', level: 80, icon: SiExpress },
+      { name: 'SQL & NoSQL', level: 80, icon: FaDatabase },
+    ],
+  },
+  {
+    title: 'Tools & Others',
+    skills: [
+      { name: 'Git & GitHub', level: 90, icon: FaGithub },
+      { name: 'Postman', level: 85, icon: SiPostman },
+      { name: 'Vercel', level: 88, icon: SiVercel },
+    ],
+  },
+];
+
 const Skills = () => {
   const [animated, setAnimated] = useState(false);
   const sectionRef = useRef(null);
@@ -21,61 +48,70 @@ const Skills = () => {
           if (sectionRef.current) observer.unobserve(sectionRef.current);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.2 }
     );
+    
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => sectionRef.current && observer.unobserve(sectionRef.current);
   }, []);
-
-  const categories = [
-    {
-      title: 'Frontend',
-      skills: [
-        { name: 'React / Next.js', level: 90, icon: <SiNextdotjs className="w-5 h-5 text-white" /> },
-        { name: 'TypeScript', level: 85, icon: <SiTypescript className="w-4 h-4 text-white" /> },
-        { name: 'Tailwind CSS', level: 95, icon: <SiTailwindcss className="w-5 h-5 text-white" /> },
-      ],
-    },
-    {
-      title: 'Backend',
-      skills: [
-        { name: 'Node.js', level: 85, icon: <FaNodeJs className="w-5 h-5 text-white" /> },
-        { name: 'Express.js', level: 80, icon: <SiExpress className="w-5 h-5 text-white" /> },
-        { name: 'SQL & NoSQL', level: 80, icon: <FaDatabase className="w-4 h-4 text-white" /> },
-      ],
-    },
-    {
-      title: 'Tools & Others',
-      skills: [
-        { name: 'Git & GitHub', level: 90, icon: <FaGithub className="w-5 h-5 text-white" /> },
-        { name: 'Postman', level: 85, icon: <SiPostman className="w-4 h-4 text-white" /> },
-        { name: 'Vercel', level: 88, icon: <SiVercel className="w-4 h-4 text-white" /> },
-      ],
-    },
-  ];
   
   return (
-    <section id="skills" ref={sectionRef} className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0B1115]">
-      <div className="max-w-7xl mx-auto">
+    <section id="skills" ref={sectionRef} className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0B1115] relative">
+      <div className="max-w-7xl mx-auto relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center mb-16" data-aos="fade-up">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Technical Arsenal</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            A comprehensive breakdown of the technologies, frameworks, and tools I use on a daily basis to build and deploy applications.
+          </p>
+        </div>
+
+        {/* Skills Grid */}
         <div className="grid md:grid-cols-3 gap-8">
           {categories.map((category, index) => (
-            <div key={index} className="bg-[#121C22] rounded-[2rem] p-8 border border-white/5" data-aos="fade-up" data-aos-delay={index * 100}>
-              <h3 className="text-xl font-bold text-white mb-8 pb-4 border-b border-white/5">{category.title}</h3>
-              <div className="space-y-6">
-                {category.skills.map((skill, i) => (
-                  <div key={i}>
-                    <div className="flex justify-between items-center mb-2">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-white/5 rounded-lg border border-white/5">{skill.icon}</div>
-                        <span className="text-gray-300 font-medium text-sm">{skill.name}</span>
+            <div 
+              key={index} 
+              className="bg-[#121C22] rounded-[2rem] p-8 border border-white/5 hover:border-white/10 transition-colors shadow-lg" 
+              data-aos="fade-up" 
+              data-aos-delay={index * 150}
+            >
+              <h3 className="text-xl font-bold text-white mb-8 pb-4 border-b border-white/5 flex items-center gap-3">
+                <span className="w-2 h-2 rounded-full bg-[#00D49F]"></span>
+                {category.title}
+              </h3>
+              
+              <div className="space-y-7">
+                {category.skills.map((skill, i) => {
+                  const Icon = skill.icon;
+                  return (
+                    <div key={i} className="group">
+                      <div className="flex justify-between items-center mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2.5 bg-[#0B1115] rounded-xl border border-white/5 group-hover:border-[#00D49F]/30 group-hover:bg-[#00D49F]/5 transition-all">
+                            <Icon className="w-5 h-5 text-gray-300 group-hover:text-[#00D49F] transition-colors" />
+                          </div>
+                          <span className="text-gray-200 font-medium text-sm group-hover:text-white transition-colors">{skill.name}</span>
+                        </div>
+                        <span className="text-[#00D49F] font-bold text-sm tracking-wider">{skill.level}%</span>
                       </div>
-                      <span className="text-[#00D49F] font-bold text-sm">{skill.level}%</span>
+                      
+                      {/* Enhanced Progress Bar */}
+                      <div className="w-full bg-[#0B1115] rounded-full h-2.5 overflow-hidden border border-white/5 shadow-inner">
+                        <div 
+                          className="h-full rounded-full bg-gradient-to-r from-[#00b386] to-[#00D49F] relative" 
+                          style={{ 
+                            width: animated ? `${skill.level}%` : '0%', 
+                            transition: 'width 1.2s cubic-bezier(0.4, 0, 0.2, 1)' 
+                          }}
+                        >
+                          {/* Shimmer effect inside the bar */}
+                          <div className="absolute top-0 right-0 bottom-0 left-0 bg-white/20 rounded-full blur-[2px]"></div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="w-full bg-[#0B1115] rounded-full h-2 overflow-hidden border border-white/5">
-                      <div className="bg-[#00D49F] h-full rounded-full" style={{ width: animated ? `${skill.level}%` : '0%', transition: 'width 1s ease-out' }}></div>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}
