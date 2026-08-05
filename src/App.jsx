@@ -4,7 +4,7 @@ import 'aos/dist/aos.css';
 
 // Component Imports
 import Header from './components/Header';
-import Hero from './components/Hero'; 
+// import Hero from './components/Hero'; // Assuming you have this
 import About from './components/About';
 import Skills from './components/Skills';
 import Experience from './components/Experience'; 
@@ -40,7 +40,6 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
-    // ONLY initialize AOS after loading is complete so animations are visible
     if (!isLoading) {
       AOS.init({
         duration: 1000,
@@ -48,34 +47,19 @@ function App() {
         easing: 'ease-out-cubic',
         offset: 50,
       });
-      AOS.refresh();
+      // Timeout ensures the DOM is fully rendered after preloader disappears before calculating scroll points
+      setTimeout(() => AOS.refresh(), 100);
     }
-
-    const handleClick = (e) => {
-      const target = e.target.closest('a');
-      if (target && target.hash) {
-        e.preventDefault();
-        const element = document.querySelector(target.hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    };
-    
-    document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
   }, [isLoading]); 
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      {/* Show Preloader */}
       {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
       
-      {/* Main Content - Fades in smoothly after load */}
       <div className={`min-h-screen bg-[#0B1115] transition-opacity duration-700 ease-in-out ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
         <Header />
         <main>
-          <Hero />
+          {/* <Hero /> */}
           <About />
           <Skills />
           <Experience />  
