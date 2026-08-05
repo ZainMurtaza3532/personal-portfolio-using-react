@@ -10,7 +10,7 @@ const features = [
 const About = () => {
   return (
     <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0B1115] overflow-hidden relative">
-      {/* Background Enhancements: Added a secondary blob for balance and a subtle pulse animation */}
+      {/* Background Enhancements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00D49F] rounded-full mix-blend-multiply filter blur-[128px] opacity-10 animate-pulse pointer-events-none duration-1000" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-900 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 pointer-events-none" />
 
@@ -18,14 +18,11 @@ const About = () => {
         
         {/* Visual Profile Side */}
         <div className="relative mx-auto w-full max-w-md lg:max-w-none" data-aos="fade-right" data-aos-duration="1200">
-          {/* Enhanced Glowing backdrop effect */}
           <div className="absolute inset-0 bg-gradient-to-tr from-[#00D49F]/30 via-transparent to-emerald-500/10 rounded-[2rem] blur-2xl transform -rotate-3 scale-105 transition-transform duration-700 group-hover:rotate-0" />
           
           <div className="relative z-10 rounded-[2rem] overflow-hidden bg-[#121C22]/80 backdrop-blur-xl border border-white/10 aspect-[4/5] p-3 flex items-center justify-center group shadow-2xl">
             <div className="w-full h-full rounded-xl overflow-hidden relative border border-white/5">
-              {/* Overlay gradient that fades on hover for a dramatic reveal */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B1115] via-[#00D49F]/10 to-transparent opacity-60 group-hover:opacity-0 transition-opacity duration-700 z-10" />
-              
               <img 
                  src="/img.png" 
                  alt="Portrait of Zain Murtaza, Fullstack Developer"
@@ -52,13 +49,13 @@ const About = () => {
               </span> web apps.
             </h2>
             
-            {/* Improved contrast from text-gray-400 to text-gray-300 for better readability */}
             <div className="space-y-5 text-gray-300 leading-relaxed text-lg font-normal">
+              {/* FIXED: Replaced ' with &apos; */}
               <p>
-                I'm a fullstack developer specializing in Next.js and modern web technologies. I enjoy building fast, scalable, and visually clean applications that solve real-world problems. My focus is on writing maintainable code and delivering smooth user experiences.
+                I&apos;m a fullstack developer specializing in Next.js and modern web technologies. I enjoy building fast, scalable, and visually clean applications that solve real-world problems. My focus is on writing maintainable code and delivering smooth user experiences.
               </p>
               <p>
-                Over time, I've worked with tools like TypeScript, Supabase, and modern UI systems to create projects that are both functional and production-ready.
+                Over time, I&apos;ve worked with tools like TypeScript, Supabase, and modern UI systems to create projects that are both functional and production-ready.
               </p>
             </div>
           </div>
@@ -81,7 +78,6 @@ const About = () => {
 
           {/* Call to Actions */}
           <div className="flex flex-col sm:flex-row items-center gap-5 pt-2">
-            {/* Changed from <button> to <a> for semantic file downloading */}
             <a 
               href="/cv.pdf" 
               download
