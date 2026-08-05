@@ -36,7 +36,7 @@ const Header = () => {
       
       const scrollPosition = window.scrollY + 150; 
       
-      
+      // Dynamically check only the sections that exist in navItems
       for (const item of navItems) {
         const element = document.getElementById(item.id);
         if (element) {
