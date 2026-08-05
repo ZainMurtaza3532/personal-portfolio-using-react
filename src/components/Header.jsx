@@ -36,7 +36,7 @@ const Header = () => {
       
       const scrollPosition = window.scrollY + 150; 
       
-      // Dynamically check only the sections that exist in navItems
+      
       for (const item of navItems) {
         const element = document.getElementById(item.id);
         if (element) {
@@ -63,7 +63,7 @@ const Header = () => {
 
   const scrollToSection = useCallback((e, href, id) => {
     e.preventDefault();
-    // Special case for home to scroll to absolute top
+    
     if (id === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setActiveSection('home');
