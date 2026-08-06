@@ -1,6 +1,13 @@
 import React from 'react';
-import { Code2, Layout, Zap, Download, ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
-
+import {
+  Code2,
+  Layout,
+  Zap,
+  Download,
+  ArrowRight,
+  Sparkles,
+  CheckCircle2,
+} from "lucide-react";
 const features = [
   { icon: Code2, title: 'Clean Architecture', desc: 'Maintainable, testable & scalable codebases' },
   { icon: Layout, title: 'Fullstack Mastery', desc: 'End-to-end solutions from DB to UI' },
