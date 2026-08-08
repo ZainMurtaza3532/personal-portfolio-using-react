@@ -6,34 +6,34 @@ const Projects = () => {
     {
       title: 'Fullstack SaaS Dashboard',
       description: 'A modern analytics dashboard built with Next.js, Prisma, and PostgreSQL featuring authentication, charts, and real-time updates.',
-      image: '/images/dashboard.jpg',
+      image: '/images/preview.jpg',
       technologies: ['Next.js', 'TypeScript', 'Prisma'],
       liveUrl: '#',
-      githubUrl: '#'
+      githubUrl: 'https://github.com/ZainMurtaza3532'
     },
     {
       title: 'AI Content Generator',
       description: 'Generate blog posts and marketing copy using OpenAI API, Next.js, and a clean UI system.',
-      image: '/images/ai-gen.jpg',
+      image: '/images/abc.png',
       technologies: ['Next.js', 'OpenAI', 'Tailwind'],
       liveUrl: '#',
-      githubUrl: '#'
+      githubUrl: 'https://github.com/ZainMurtaza3532'
     },
     {
       title: 'Portfolio Website',
       description: 'A personal portfolio showcasing projects, skills, and contact features with smooth animations and modern design.',
-      image: '/images/portfolio.jpg',
+      image: '/images/majid-003.webp',
       technologies: ['React', 'Framer Motion'],
       liveUrl: '#',
-      githubUrl: '#'
+      githubUrl: 'https://github.com/ZainMurtaza3532'
     },
     {
       title: 'Real-Time Chat Application',
       description: 'A fullstack real-time chat app with authentication, direct messaging, and live updates using WebSockets and a robust backend architecture.',
-      image: '/images/chat.jpg',
+      image: '/images/Netflix.webp',
       technologies: ['React', 'Socket.io', 'MongoDB'],
       liveUrl: '#',
-      githubUrl: '#'
+      githubUrl: 'https://github.com/ZainMurtaza3532'
     }
   ];
 
@@ -68,6 +68,8 @@ const Projects = () => {
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>
