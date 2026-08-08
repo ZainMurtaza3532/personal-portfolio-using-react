@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import { FaNodeJs, FaDatabase, FaGithub } from 'react-icons/fa';
-import { 
-  SiTypescript, 
-  SiTailwindcss, 
-  SiNextdotjs, 
-  SiExpress,   
-  SiPostman, 
-  SiVercel 
+import {
+  SiTypescript,
+  SiTailwindcss,
+  SiNextdotjs,
+  SiExpress,
+  SiPostman,
+  SiVercel,
 } from 'react-icons/si';
 
 const categories = [
@@ -37,26 +37,8 @@ const categories = [
 ];
 
 const Skills = () => {
-  const [animated, setAnimated] = useState(false);
-  const sectionRef = useRef(null);
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setAnimated(true);
-          if (sectionRef.current) observer.unobserve(sectionRef.current);
-        }
-      },
-      { threshold: 0.2 }
-    );
-    
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => sectionRef.current && observer.unobserve(sectionRef.current);
-  }, []);
-  
   return (
-    <section id="skills" ref={sectionRef} className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0B1115] relative">
+    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0B1115] relative">
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Section Header */}
@@ -98,12 +80,9 @@ const Skills = () => {
                       
                       {/* Enhanced Progress Bar */}
                       <div className="w-full bg-[#0B1115] rounded-full h-2.5 overflow-hidden border border-white/5 shadow-inner">
-                        <div 
-                          className="h-full rounded-full bg-gradient-to-r from-[#00b386] to-[#00D49F] relative" 
-                          style={{ 
-                            width: animated ? `${skill.level}%` : '0%', 
-                            transition: 'width 1.2s cubic-bezier(0.4, 0, 0.2, 1)' 
-                          }}
+                        <div
+                          className="h-full rounded-full bg-gradient-to-r from-[#00b386] to-[#00D49F] relative"
+                          style={{ width: `${skill.level}%` }}
                         >
                           {/* Shimmer effect inside the bar */}
                           <div className="absolute top-0 right-0 bottom-0 left-0 bg-white/20 rounded-full blur-[2px]"></div>
