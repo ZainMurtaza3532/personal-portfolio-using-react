@@ -8,8 +8,9 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle submission logic
-    console.log(formData);
+    const subject = encodeURIComponent(`Portfolio inquiry from ${formData.name}`);
+    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+    window.location.href = `mailto:zainmurtaza3532@gmail.com?subject=${subject}&body=${body}`;
     setFormData({ name: '', email: '', message: '' });
   };
 
@@ -103,7 +104,7 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-gray-500 text-xs font-bold uppercase tracking-wider mb-1">Email</p>
-                <a href="mailto:zain@example.com" className="text-white font-medium hover:text-[#00D49F] transition-colors text-base">
+                <a href="mailto:zainmurtaza3532@gmail.com" className="text-white font-medium hover:text-[#00D49F] transition-colors text-base">
                   zainmurtaza3532@gmail.com
                 </a>
               </div>
@@ -136,13 +137,13 @@ const Contact = () => {
 
             {/* Social Links Row */}
             <div className="grid grid-cols-3 gap-4 mt-auto pt-2">
-              <a href="#" className="bg-[#11181C] border border-white/5 rounded-2xl p-4 flex items-center justify-center text-gray-400 hover:text-[#00D49F] hover:border-[#00D49F]/30 transition-all">
+              <a href="https://github.com/ZainMurtaza3532" target="_blank" rel="noreferrer" aria-label="Visit GitHub profile" className="bg-[#11181C] border border-white/5 rounded-2xl p-4 flex items-center justify-center text-gray-400 hover:text-[#00D49F] hover:border-[#00D49F]/30 transition-all">
                 <Github className="w-6 h-6" />
               </a>
-              <a href="#" className="bg-[#11181C] border border-white/5 rounded-2xl p-4 flex items-center justify-center text-gray-400 hover:text-[#00D49F] hover:border-[#00D49F]/30 transition-all">
+              <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="Visit LinkedIn profile" className="bg-[#11181C] border border-white/5 rounded-2xl p-4 flex items-center justify-center text-gray-400 hover:text-[#00D49F] hover:border-[#00D49F]/30 transition-all">
                 <Linkedin className="w-6 h-6" />
               </a>
-              <a href="#" className="bg-[#11181C] border border-white/5 rounded-2xl p-4 flex items-center justify-center text-gray-400 hover:text-[#00D49F] hover:border-[#00D49F]/30 transition-all">
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Visit Twitter profile" className="bg-[#11181C] border border-white/5 rounded-2xl p-4 flex items-center justify-center text-gray-400 hover:text-[#00D49F] hover:border-[#00D49F]/30 transition-all">
                 <Twitter className="w-6 h-6" />
               </a>
             </div>
