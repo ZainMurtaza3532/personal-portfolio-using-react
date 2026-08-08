@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import {
   Code2,
   Layout,
@@ -15,27 +15,9 @@ const features = [
   { icon: Zap, title: 'High Performance', desc: 'Optimized experiences & fast load times' },
 ];
 
-const useInView = (threshold = 0.2) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setIsVisible(true),
-      { threshold }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [threshold]);
-
-  return { ref, isVisible };
-};
-
 const About = () => {
-  const { ref: leftRef, isVisible: leftVisible } = useInView(0.15);
-  const { ref: rightRef, isVisible: rightVisible } = useInView(0.15);
-  const reduceMotion = typeof window!== 'undefined'
-   ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const reduceMotion = typeof window !== 'undefined'
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
     : false;
 
   return (
@@ -54,10 +36,7 @@ const About = () => {
       <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
         {/* Visual Side */}
-        <div
-          ref={leftRef}
-          className={`relative w-full max-w-md mx-auto lg:max-w-none transition-all duration-700 ease-out ${leftVisible? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
-        >
+        <div className="relative w-full max-w-md mx-auto lg:max-w-none transition-all duration-700 ease-out opacity-100 translate-x-0">
           <div className="absolute inset-0 bg-gradient-to-tr from-[#00D49F]/25 via-emerald-500/10 to-transparent rounded-[2.5rem] blur-2xl -rotate-2 scale-105" />
 
           <div className="relative z-10 rounded-[2.5rem] overflow-hidden bg-[#121C22]/80 backdrop-blur-xl border-white/10 aspect-[4/5] p-2.5 group shadow-2xl">
@@ -86,10 +65,7 @@ const About = () => {
         </div>
 
         {/* Text Content */}
-        <div
-          ref={rightRef}
-          className={`space-y-8 transition-all duration-700 delay-150 ease-out ${rightVisible? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
-        >
+        <div className="space-y-8 transition-all duration-700 delay-150 ease-out opacity-100 translate-x-0">
           <div className="space-y-5">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#00D49F]/10 border-[#00D49F]/30 text-[#00D49F] text-sm font-semibold tracking-wide">
               <Sparkles className="w-4 h-4 mr-2" />
@@ -118,7 +94,7 @@ const About = () => {
             {['Production-Ready Code', 'Responsive UI/UX', 'API & DB Design', 'Performance Optimization'].map((item, i) => (
               <div
                 key={item}
-                className={`flex items-center gap-2 transition-all duration-500 ${rightVisible? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
+                className="flex items-center gap-2 transition-all duration-500 opacity-100 translate-y-0"
                 style={{ transitionDelay: `${300 + i * 80}ms` }}
               >
                 <CheckCircle2 className="w-4 h-4 text-[#00D49F] flex-shrink-0" />
@@ -132,7 +108,7 @@ const About = () => {
             {features.map((feature, idx) => (
               <div
                 key={idx}
-                className={`bg-[#121C22]/70 backdrop-blur-md border-white/5 rounded-2xl p-5 group hover:-translate-y-1.5 hover:bg-[#121C22] hover:border-[#00D49F]/40 hover:shadow-[0_12px_40px_rgba(0,212,159,0.12)] transition-all duration-300 focus-within:ring-2 focus-within:ring-[#00D49F]/30 ${rightVisible? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                className="bg-[#121C22]/70 backdrop-blur-md border-white/5 rounded-2xl p-5 group hover:-translate-y-1.5 hover:bg-[#121C22] hover:border-[#00D49F]/40 hover:shadow-[0_12px_40px_rgba(0,212,159,0.12)] transition-all duration-300 focus-within:ring-2 focus-within:ring-[#00D49F]/30 opacity-100 translate-y-0"
                 style={{ transitionDelay: `${500 + idx * 100}ms` }}
                 tabIndex={0}
               >
@@ -152,3 +128,21 @@ const About = () => {
               download
               className="flex justify-center items-center gap-2 bg-[#00D49F] hover:bg-[#00E5AC] text-[#0B1115] px-8 py-3.5 rounded-full font-bold transition-all shadow-[0_0_20px_rgba(0,212,159,0.25)] hover:shadow-[0_0_35px_rgba(0,212,159,0.45)] hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-[#00D49F]/30 active:translate-y-0"
             >
+              <Download className="w-4 h-4" />
+              Download Resume
+            </a>
+            <a
+              href="#contact"
+              className="flex justify-center items-center gap-2 border border-white/10 bg-white/5 hover:bg-white/10 text-white px-8 py-3.5 rounded-full font-semibold transition-all hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-[#00D49F]/20"
+            >
+              Let&apos;s Talk
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default About;
